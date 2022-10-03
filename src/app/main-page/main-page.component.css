@@ -1,0 +1,17 @@
+.head header{
+    position: relative;
+    margin: 20px 0;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 80px;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 72px;
+}
+
+.subhead{
+    padding: 12px 0 12px 0;
+    border-bottom: 2px solid #2f2f2f;
+    border-top: 2px solid #2f2f2f;
+    text-transform: uppercase;
+}
