@@ -1,8 +1,14 @@
+<div class="head">
+    <header>Newspaper</header>
+    <div class="subhead">York, MA - Thursday August 30, 1978 - Seven Pages
+        <app-login></app-login>
+    </div>
+</div>
 <div class="container">
-    <div class="head">
-        <div class="headerobjectswrapper">
-            <header>Newspaper</header>
-        </div>
-        <div class="subhead">York, MA - Thursday August 30, 1978 - Seven Pages</div>
+    <div class="articles-list" *ngFor="let article of articlesList; let indexOfelement = index;">
+        <div class="collumn">
+            <div class="title"><span>Hola</span>
+                <p><span class="subtitle">Adios</span></p>
+            </div>
     </div>
 </div>

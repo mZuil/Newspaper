@@ -55,6 +55,7 @@ export class NewsService {
   //  "thumbnail_media_type":...}
 
   getArticles(): Observable<Article[]> {
+    console.log("getArticles");
     return this.http.get<Article[]>(this.newsUrl, this.httpOptions);
   }
 
