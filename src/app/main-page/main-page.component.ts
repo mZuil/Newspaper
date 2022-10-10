@@ -11,16 +11,19 @@ export class MainPageComponent implements OnInit {
 
   articlesList?: Article[];
 
-  constructor(/*private newsService: NewsService*/) {}
+  constructor(private newsService: NewsService) {}
 
   ngOnInit(): void {
     //We get all the articles
-    //this.getAllArticles();
+    this.getAllArticles();
   }
 
   getAllArticles(): void{
-    //this.newsService.getArticles().subscribe(list => this.articlesList = list);
-    //console.log(this.articlesList?.length);
+    
+    this.newsService.getArticles().subscribe(list => {
+      this.articlesList = list;
+      console.log(this.articlesList?.length);
+    });
   }
 
 }

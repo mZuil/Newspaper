@@ -23,7 +23,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) {
     this.message = "";
-    this.user = {} as User;
+    this.user = null;
   }
 
   isLogged() {

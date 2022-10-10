@@ -1,6 +1,7 @@
-<div *ngIf="isLogged()">
+<div *ngIf="isLogged(); else notLogged">
     <p>eeeeee</p>
 </div>
-<div *ngIf="!isLogged()">
+
+<ng-template #notLogged>
     <p>oooooo</p>
-</div>
+</ng-template>

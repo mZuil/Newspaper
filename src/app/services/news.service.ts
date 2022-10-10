@@ -17,13 +17,13 @@ export class NewsService {
   constructor(private http: HttpClient) { }
 
   // Set the corresponding APIKEY accordig to the received by email
-  private APIKEY?: string;
-  private APIKEY_ANON = 'ANON06_339';
+  //private APIKEY?: string;
+  private APIKEY = 'ANON06_339';
 
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'PUIRESTAUTH apikey=' + this.APIKEY_ANON
+      Authorization: 'apikey=' + this.APIKEY
     })
   };
 
@@ -33,14 +33,14 @@ export class NewsService {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: 'PUIRESTAUTH apikey=' + this.APIKEY
+        Authorization: 'apikey=' + this.APIKEY
       })
     };
     console.log('Apikey successfully changed ' + this.APIKEY);
   }
 
   setAnonymousApiKey() {
-    this.setUserApiKey(this.APIKEY_ANON);
+    this.setUserApiKey(this.APIKEY);
   }
 
   // Returns the list of news contain elements with the following fields:
@@ -81,7 +81,6 @@ export class NewsService {
     console.log('Requesting article id=' + id);
     const url = `${this.articleUrl}/${id}`;
     return this.http.get<Article>(url, this.httpOptions);
-
   }
 
   updateArticle(article: Article): Observable<Article> {
