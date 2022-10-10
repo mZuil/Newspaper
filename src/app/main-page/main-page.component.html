@@ -1,0 +1,14 @@
+<div class="head">
+    <header>Newspaper</header>
+    <div class="subhead">York, MA - Thursday August 30, 1978 - Seven Pages
+        <app-login></app-login>
+    </div>
+</div>
+<div class="container">
+    <div class="articles-list" *ngFor="let article of articlesList; let indexOfelement = index;">
+        <div class="collumn">
+            <div class="title"><span>{{article.title}}</span>
+                <p><span class="subtitle">Adios</span></p>
+            </div>
+    </div>
+</div>
