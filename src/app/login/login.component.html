@@ -1,7 +1,9 @@
 <div *ngIf="isLogged(); else notLogged">
-    <p>eeeeee</p>
+    <!--<p>Hello, {{user.username}}</p>-->
 </div>
 
 <ng-template #notLogged>
-    <p>oooooo</p>
+    <input type="text" placeholder="Username">
+    <input type="password" placeholder="Password">
+    <button type="submit">Log in</button>
 </ng-template>
