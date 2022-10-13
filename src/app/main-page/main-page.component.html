@@ -15,7 +15,7 @@
                 <p><span class="subtitle">{{article.subtitle}}</span></p>
             </div>
             <img [src]="'data:' + article.thumbnail_media_type + ';base64,' + article.thumbnail_image ">
-            <p>{{article.abstract}}</p>
+            <p [innerHTML]="article.abstract"></p>
         </div>
     </div>
 </div>
