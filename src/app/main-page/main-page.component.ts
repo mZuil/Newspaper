@@ -26,7 +26,6 @@ export class MainPageComponent implements OnInit {
       for(let i = 0; i < this.articlesList.length/3; i++){
         this.groupingLists.push(this.articlesList.slice(i*3, i*3 + 3));
       }
-      console.log("Lista de listas: " + this.groupingLists)
     });
   }
 }
