@@ -10,6 +10,7 @@ import { NewsService } from '../services/news.service';
 export class MainPageComponent implements OnInit {
 
   articlesList?: Article[];
+  groupingLists: Article[][] = [];
 
   constructor(private newsService: NewsService) {}
 
@@ -22,8 +23,10 @@ export class MainPageComponent implements OnInit {
     
     this.newsService.getArticles().subscribe(list => {
       this.articlesList = list;
-      console.log(this.articlesList?.length);
+      for(let i = 0; i < this.articlesList.length/3; i++){
+        this.groupingLists.push(this.articlesList.slice(i*3, i*3 + 3));
+      }
+      console.log("Lista de listas: " + this.groupingLists)
     });
   }
-
 }
