@@ -42,3 +42,8 @@ nav{
     justify-content: space-between;
     align-items: center;
 }
+
+/************* CONTENT **************/
+#content {
+    margin-top: 30px;
+}
