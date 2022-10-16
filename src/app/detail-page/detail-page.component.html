@@ -1,0 +1,25 @@
+<head>
+    <title>One Page Wonder - Start Bootstrap Template</title>
+</head>
+<body id="page-top">
+    <button  type="button" (click)="goBack()" class="btn btn-primary">Back</button>
+    <!-- Header-->
+    <header class="masthead text-center">
+        <div class="masthead-content">
+            <div class="container px-5">
+                <span class="overlay-text">
+                <h1 class="masthead-heading mb-2"> {{ article.title }}</h1>
+                <h5 class="masthead-subheading mb-0"> {{ article.subtitle }} </h5>
+                </span>
+            </div>
+        </div>
+    </header>
+    <div>
+        <p [innerHTML]= "article.category"></p>
+        <p [innerHTML]= "article.aut"></p>
+        <p [innerHTML]= "article.update_date"></p>
+        <p [innerHTML]= "article.abstract"></p>
+        <p [innerHTML]= "article.body"></p>
+    </div>
+</body>
+

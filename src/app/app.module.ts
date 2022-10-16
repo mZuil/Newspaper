@@ -8,13 +8,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { OnWindowScrollDirective } from './directives/on-window-scroll.directive';
+import { DetailPageComponent } from './detail-page/detail-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     LoginComponent,
-    OnWindowScrollDirective
+    OnWindowScrollDirective,
+    DetailPageComponent
   ],
   imports: [
     BrowserModule,

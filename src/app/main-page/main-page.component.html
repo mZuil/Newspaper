@@ -44,6 +44,7 @@
                 <p class="text-white" [innerHTML]="article.abstract"></p>
                 <!-- Card info -->
                 <p class="text-white">{{article.update_date}}</p>
+                <button class="btn btn-outline-secondary px-4 mt-5" [routerLink]="['/detail/' + article.id]"> Details </button>
             </div>
         </div>
     </div>
