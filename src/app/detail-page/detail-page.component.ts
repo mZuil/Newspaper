@@ -9,10 +9,12 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './detail-page.component.html',
   styleUrls: ['./detail-page.component.css']
 })
-export class DetailPageComponent implements OnInit {article: Article
+export class DetailPageComponent implements OnInit{
+  article: Article
   articleId?: string | null
   constructor(private route: ActivatedRoute, private location: Location, private newsService: NewsService) { 
-    this.article = {aut: 1, id: 1, category: "", username: "", abstract:"", thumbnail_image: "", thumbnail_media_type: "", subtitle:"", title:"", update_date: "", body: ""} 
+    this.article = {} as Article;
+    //{aut: 1, id: 1, category: "", username: "", abstract:"", thumbnail_image: "", thumbnail_media_type: "", subtitle:"", title:"", update_date: "", body: ""} 
   }
 
   ngOnInit(): void {

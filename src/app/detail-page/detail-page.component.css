@@ -1,0 +1,8 @@
+.bgDiv {
+    background-color: #EBEBEB;
+    opacity: 0.8
+}
+
+.imgDiv{
+    max-height: 500px;
+    min-height: 300px;}
