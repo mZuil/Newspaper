@@ -16,7 +16,7 @@
             </div>
             <img [src]="'data:' + article.thumbnail_media_type + ';base64,' + article.thumbnail_image ">
             <p [innerHTML]="article.abstract"></p>
-        </div>
+            <button class="btn btn-outline-secondary px-4 mt-5" [routerLink]="['/detail/' + article.id]"> Details </button>
     </div>
 </div>
 
