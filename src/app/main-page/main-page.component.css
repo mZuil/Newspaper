@@ -1,73 +1,49 @@
-.head header{
+/************** HEADER ***************/
+#header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url("../assets/newspaper-bg.jpg");
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 50vh;
     position: relative;
-    margin: 20px 0;
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: 80px;
-    text-align: center;
-    text-transform: uppercase;
-    line-height: 72px;
+}
+svg.wave {
+    position: absolute;
+    bottom: -120px;
+}
+.middle {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 40vh;
+    width: 70%;
+  }
+.middle h1 {
+    font-size: 70px;
 }
 
-.subhead{
-    padding: 12px 0 12px 0;
-    border-bottom: 2px solid #2f2f2f;
-    border-top: 2px solid #2f2f2f;
-    text-transform: uppercase;
-    font-family: 'Droid Serif', serif;
+@media only screen and (max-width: 600px) {
+    .middle h1 {
+        margin-top: 140px;
+        font-size: 50px;
+    }
 }
-.subhead-elements{
+
+/************** NAVBAR **************/
+
+.navbar.fixed-top.scrolled {
+    background-color: black !important;
+    transition: background-color 400ms linear;
+}
+
+nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-}
-
-.articles-list{
-    border: 1px solid #2f2f2f;
-}
-
-.articles-list .article {
-    padding: 10px;
-}
-
-.article .title{
-    text-align: center;
-    line-height: normal;
-    font-family: 'Playfair Display', serif;
-    display: block;
-    margin: 0 auto;
-    font-weight: 700;
-    font-size: 30px;
-    text-transform: uppercase;
-    padding: 10px 0 10px 0;
-}
-.article .subtitle{
-    font-weight: 400;
-    font-size: 16px;
-    box-sizing: border-box;
-    padding: 10px 0 10px 0;
-}
-.article .subtitle:before{
-    border-top: 1px solid #2f2f2f;
-    content: '';
-    width: 100px;
-    height: 7px;
-    display: block;
-    margin: 20px auto;
-}
-.article .subtitle.hl6:after{
-    border-bottom: 1px solid #2f2f2f;
-    content: '';
-    width: 100px;
-    height: 10px;
-    display: block;
-    margin: 0 auto;
-}
-.article img{
-    width:100%;
+/************* CONTENT **************/
+#content {
+    margin-top: 30px;
 }

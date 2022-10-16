@@ -1,22 +1,53 @@
-<div class="head">
-    <header>Newspaper</header>
-    <div class="subhead">
-        <div class=" container subhead-elements">
-            <p class="mb-0">DEV_TEAM_06</p>
-            <app-login></app-login>
+<section id="header">
+    <div class="container">
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" appOnWindowScroll>
+            <div class="container-fluid">
+                <a class="navbar-brand theme-text" href="#">Newspaper</a>
+                <app-login></app-login>
+            </div>
+        </nav>
+        <div class="middle">
+            <h1 class="text-white display-3 fw-bold">To keep you informed</h1>
         </div>
     </div>
-</div>
-<div class="container wrapper">
-    <div class="articles-list" *ngFor="let article of articlesList; let indexOfelement = index;">
-        <div class="article">
-            <div class="title">
-                <span>{{article.title}}</span>
-                <p><span class="subtitle">{{article.subtitle}}</span></p>
+    <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#fff" fill-opacity="1"
+            d="M0,192L60,181.3C120,171,240,149,360,133.3C480,117,600,107,720,106.7C840,107,960,117,1080,122.7C1200,128,1320,128,1380,128L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
+        </path>
+    </svg>
+</section>
+
+<section id="content">
+    <div class="container">
+        <div class="row" *ngFor="let listArticles of groupingLists; let indexFirst = index;">
+            <div *ngFor="let article of listArticles; let indexSecond = index;" [ngClass]="{'col-lg-6 col-md-12': (indexFirst % 2 == 0 && indexSecond % 3 == 0) || (indexFirst % 2 == 1 && indexSecond % 3 == 2) , 'col-lg-3 col-md-12': (indexFirst % 2 == 0 && indexSecond % 3 >= 1) || (indexFirst % 2 == 1 && indexSecond % 3 < 2)}">
+                <ng-container style="height: fit-content;" [ngTemplateOutlet]="infoNews" [ngTemplateOutletContext]="{articleElement:article}"></ng-container>
             </div>
-            <img [src]="'data:' + article.thumbnail_media_type + ';base64,' + article.thumbnail_image ">
-            <p [innerHTML]="article.abstract"></p>
-            <button class="btn btn-outline-secondary px-4 mt-5" [routerLink]="['/detail/' + article.id]"> Details </button>
+        </div>
     </div>
-</div>
+</section>
+
+<!--Template with the content of a card-->
+<ng-template #infoNews let-article='articleElement'>
+    <div class="card card-overlay-bottom card-grid-lg card-bg-scale">
+        <!--Image-->
+        <img [src]="'data:' + article.thumbnail_media_type + ';base64,' + article.thumbnail_image" style="filter: brightness(50%); object-fit:cover;">
+        <!-- Content -->
+        <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4"> 
+            <div class="mt-auto">
+                <!-- Category -->
+                <a href="#" class="badge text-bg-danger mb-2">{{article.category}}</a>
+                <!-- Card title -->
+                <h2 class="text-white h1">{{article.title}}</h2>
+                <h3 class="text-white h5">{{article.subtitle}}</h3>
+                <p class="text-white" [innerHTML]="article.abstract"></p>
+                <!-- Card info -->
+                <p class="text-white">{{article.update_date}}</p>
+                <button class="btn btn-outline-secondary px-4 mt-5" [routerLink]="['/detail/' + article.id]"> Details </button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
 

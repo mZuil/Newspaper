@@ -7,6 +7,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { OnWindowScrollDirective } from './directives/on-window-scroll.directive';
 import { DetailPageComponent } from './detail-page/detail-page.component';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { DetailPageComponent } from './detail-page/detail-page.component';
     AppComponent,
     MainPageComponent,
     LoginComponent,
+    OnWindowScrollDirective,
     DetailPageComponent
   ],
   imports: [
