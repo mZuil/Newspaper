@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { OnWindowScrollDirective } from './directives/on-window-scroll.directive';
 import { DetailPageComponent } from './detail-page/detail-page.component';
+import { ModificationArticleComponent } from './modification-article/modification-article.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,13 +18,15 @@ import { DetailPageComponent } from './detail-page/detail-page.component';
     MainPageComponent,
     LoginComponent,
     OnWindowScrollDirective,
-    DetailPageComponent
+    DetailPageComponent,
+    ModificationArticleComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

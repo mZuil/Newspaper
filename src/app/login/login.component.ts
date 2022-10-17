@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   }
 
   isLogged(): boolean{
-    console.log(this.loginService.isLogged());
     return this.loginService.isLogged();
   }
 

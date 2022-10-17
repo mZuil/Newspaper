@@ -1,0 +1,106 @@
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" appOnWindowScroll>
+    <div class="container-fluid">
+        <button type="button" (click)="goBack()" class="btn btn-primary">Back</button>
+        <a class="navbar-brand theme-text" href="#">Newspaper</a>
+        <app-login></app-login>
+    </div>
+</nav>
+
+<form #articleForm="ngForm" (ngSubmit)="sendForm()">
+
+    <div>
+        <div class="input-group">
+            <span class="input-group-text w-7">Title</span>
+            <input class="form-control" 
+                type="text" 
+                required
+                [(ngModel)]="article.title"
+                name="aTitle"
+                #aTitle="ngModel"
+                aria-label="Title of the article" 
+                placeholder="Insert here the title..."
+             />
+        </div>
+        <div class="alert alert-danger mt-2" *ngIf="aTitle.touched && !aTitle.valid">
+            <div *ngIf="aTitle.errors?.['required']">Title is required.</div>
+        </div>
+    </div>
+
+    <div>
+        <div class="input-group">
+            <span class="input-group-text w-7">Subtitle</span>
+            <input class="form-control" 
+                type="text" 
+                required
+                [(ngModel)]="article.subtitle"
+                name="aSubtitle"
+                #aSubtitle="ngModel"
+                aria-label="Subtitle of the article" 
+                placeholder="Insert here the subtitle..."
+             />
+        </div>
+        <div class="alert alert-danger mt-2" *ngIf="aSubtitle.touched && !aSubtitle.valid">
+            <div *ngIf="aSubtitle.errors?.['required']">Subtitle is required.</div>
+        </div>
+    </div>
+
+    <div>
+        <select class="form-select" aria-label="Default select example" required [(ngModel)]="article.category" name="aCategory" #aCategory="ngModel">
+            <option value="National" [selected]="article.category == 'National'">National</option>
+            <option value="Economy" [selected]="article.category == 'Economy'">Economy</option>
+            <option value="Sports" [selected]="article.category == 'Sports'">Sports</option>
+            <option value="Technology" [selected]="article.category == 'Technology'">Technology</option>
+        </select>
+        <div class="alert alert-danger mt-2" *ngIf="aSubtitle.touched && !aSubtitle.valid">
+            <div *ngIf="aSubtitle.errors?.['required']">Subtitle is required.</div>
+        </div>
+    </div>
+
+    <div>
+        <div class="input-group">
+            <span class="input-group-text w-7">Abstract</span>
+            <input class="form-control" 
+                type="text" 
+                required
+                [(ngModel)]="article.abstract"
+                name="aAbstract"
+                #aAbstract="ngModel"
+                aria-label="Abstract of the article" 
+                placeholder="Insert here the abstract..."
+             />
+        </div>
+        <div class="alert alert-danger mt-2" *ngIf="aAbstract.touched && !aAbstract.valid">
+            <div *ngIf="aAbstract.errors?.['required']">Abstract is required.</div>
+        </div>
+    </div>
+
+    <!--TO DOOOOOOOOOOOOOOO-->
+    <div>
+        <div class="input-group">
+            <span class="input-group-text w-7">Body</span>
+            <input class="form-control" 
+                type="text" 
+                [(ngModel)]="article.body"
+                name="aBody"
+                #aBody="ngModel"
+                aria-label="Body of the article" 
+                placeholder="Insert here the body..."
+             />
+        </div>
+    </div>
+
+    <div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Default file input example</label>
+            <input class="form-control" type="file" (change)="fileChangeEvent($event)">
+
+        </div>
+    </div>
+
+    <div class="col-xs-12 my-4">
+        <div  class="text-center">
+            <button class="btn btn-primary btn-lg first-button" type="submit" [disabled]="!articleForm.form.valid">Send</button>
+        </div>
+    </div>
+</form>
