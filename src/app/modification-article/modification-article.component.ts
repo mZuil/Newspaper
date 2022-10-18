@@ -40,7 +40,7 @@ export class ModificationArticleComponent implements OnInit {
 	sendForm(): void {
 		this.addArticle();
 		window.alert("Tha article has been submitted correctly");
-		this.goBack();
+		//this.goBack();
 	}
 
 	addArticle(): void {

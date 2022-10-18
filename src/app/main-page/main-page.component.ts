@@ -25,6 +25,7 @@ export class MainPageComponent implements OnInit {
 
 	getAllArticles(): void {
 		this.newsService.getArticles().subscribe(list => {
+			console.log(list.length);
 			this.articlesList = list;
 			for (let i = 0; i < this.articlesList.length / 3; i++) {
 				this.groupingLists.push(this.articlesList.slice(i * 3, i * 3 + 3));

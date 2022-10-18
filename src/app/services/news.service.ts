@@ -17,13 +17,13 @@ export class NewsService {
   constructor(private http: HttpClient) { }
 
   // Set the corresponding APIKEY accordig to the received by email
-  //private APIKEY?: string;
-  private APIKEY = 'ANON06_339';
+  private APIKEY?: string;
+  private APIKEY_ANON = 'ANON06_339';
 
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'apikey=' + this.APIKEY
+      Authorization: 'PUIRESTAUTH apikey=' + this.APIKEY_ANON
     })
   };
 
@@ -33,14 +33,14 @@ export class NewsService {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: 'apikey=' + this.APIKEY
+        Authorization: 'PUIRESTAUTH apikey=' + this.APIKEY
       })
     };
     console.log('Apikey successfully changed ' + this.APIKEY);
   }
 
   setAnonymousApiKey() {
-    this.setUserApiKey(this.APIKEY);
+    this.setUserApiKey(this.APIKEY_ANON);
   }
 
   // Returns the list of news contain elements with the following fields:
@@ -55,14 +55,12 @@ export class NewsService {
   //  "thumbnail_media_type":...}
 
   getArticles(): Observable<Article[]> {
-    console.log("getArticles");
     return this.http.get<Article[]>(this.newsUrl, this.httpOptions);
   }
 
   deleteArticle(article: Article | number): Observable<Article> {
     if(typeof article === 'string')
       article = Number.parseInt(article);
-    
     const id = typeof article === 'number' ? article : article.id;
     const url = `${this.articleUrl}/${id}`;
     return this.http.delete<Article>(url, this.httpOptions);
@@ -80,10 +78,12 @@ export class NewsService {
   //  "image_data":...,
   //  "image_media_type":...}
 
+
   getArticle(id: number): Observable<Article> {
     console.log('Requesting article id=' + id);
     const url = `${this.articleUrl}/${id}`;
     return this.http.get<Article>(url, this.httpOptions);
+
   }
 
   updateArticle(article: Article): Observable<Article> {

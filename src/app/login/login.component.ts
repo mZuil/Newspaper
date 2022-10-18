@@ -30,13 +30,14 @@ export class LoginComponent implements OnInit {
   onLogin():void {
     console.log("On login");
     this.loginService.login(this.username, this.password).subscribe(userReturned =>{
-      this.newsService.setUserApiKey(userReturned.apikey)
-      this.user = userReturned;
+      this.newsService.setUserApiKey(userReturned.apikey);
   })
 }
 
   onLogout():void {
-    this.loginService.logout()
+    this.loginService.logout();
+    this.newsService.setAnonymousApiKey();
+    sessionStorage.removeItem('currentUser');
     this.clear();
   }
 
@@ -47,7 +48,6 @@ export class LoginComponent implements OnInit {
 
 
   isLogged(): boolean{
-    console.log(this.loginService.isLogged());
     return this.loginService.isLogged();
   }
 
