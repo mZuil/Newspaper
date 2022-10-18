@@ -52,9 +52,9 @@
                     <!--Details buttons-->
                     <button class="btn btn-outline-secondary" [routerLink]="['/detail/', article.id]">Details</button>
                     <!--Modify button-->
-                    <button class="btn btn-outline-secondary" [routerLink]="['/article/', article.id]">Modify</button>
+                    <button class="btn btn-outline-secondary" *ngIf="isLogged()" [routerLink]="['/article/', article.id]">Modify</button>
                     <!-- Delete button -->
-                    <button class="btn btn-outline-primary" (click)="openModal(mymodal, article.id)">Delete</button>
+                    <button class="btn btn-outline-primary" *ngIf="isLogged()" (click)="openModal(mymodal, article.id)">Delete</button>
                 </div>
                 
             </div>

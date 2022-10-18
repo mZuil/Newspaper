@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Article } from '../interfaces/Article';
+import { LoginService } from '../services/login.service';
 import { NewsService } from '../services/news.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class MainPageComponent implements OnInit {
 	groupingLists: Article[][] = [];
 	idDeleted: number;
 
-	constructor(private newsService: NewsService, private modalService: NgbModal) {
+	constructor(private newsService: NewsService, private loginService: LoginService, private modalService: NgbModal) {
 		this.idDeleted = -1;
 	 }
 
@@ -38,6 +39,10 @@ export class MainPageComponent implements OnInit {
 		this.newsService.deleteArticle(this.idDeleted).subscribe();
 		this.idDeleted = -1;
 		this.getAllArticles();
+	}
+
+	isLogged(): boolean{
+		return this.loginService.isLogged();
 	}
 
 	openModal(content: any, id: number) {
