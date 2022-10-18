@@ -1,37 +1,57 @@
-<head>
-    <title>One Page Wonder - Start Bootstrap Template</title>
-</head>
-<body id="page-top">
-    <button  type="button" (click)="goBack()" class="btn btn-primary">Back</button>
+<nav class="navbar navbar-dark bg-dark justify-content-between" appOnWindowScroll>
+    <div class="container-fluid">
+       <div>
+        <button  type="button" (click)="goBack()" class="btn btn-dark"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+          </svg></button>
+        <a class="navbar-brand theme-text" href="#">Newspaper</a>
+        </div>
+        <app-login></app-login>
+    </div>
+</nav>
+
+<div class="container">
     <!-- Header-->
-    <header class="masthead text-center">
+    <header class="masthead text-center mt-5">
         <div class="masthead-content">
-            <div class="container px-5">
                 <span class="overlay-text">
-                    <div class="shadow p-3 mb-5 bg-white rounded d-flex justify-content-center imgDiv" [style.background-image]="url(data:' + {{article.image_media_type}} + ';base64,' + {{article.image_data}} + ')">
-                        <div class="bgDiv">
-                        <h1 class="masthead-heading mb-2"> {{ article.title }}</h1>
-                        <h5 class="masthead-subheading mb-0"> {{ article.subtitle }} </h5>
-                        </div>
+                    <div class="shadow p-3 mb-5 bg-white rounded d-flex align-items-center justify-content-center imgDiv" style="background:url(data:{{article.image_media_type}};base64,{{article.image_data}}); background-size: cover;">
+                        <div class="p-2 mb-3 rounded d-flex align-items-center justify-content-center bgDiv">
+                            <span class="align-middle">
+                                <h1 class="display-3 fw-bold">{{ article.title }}</h1>
+                                <h5 class="pt-3 fst-italic"> {{article.subtitle}} </h5>
+                            </span>
+                    </div>
                     </div>
                 </span>
+                </div>
+                </header>
             <div class="row justify-content-between pb-5">
-                <div class="shadow p-3 mx-3 bg-white rounded col-sm">
-                    <h5> Category: </h5> <p [innerHTML]= "article.category"> </p>
+                <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
+                    <h5 class="text-center"> Author: </h5> <p class="text-center" [innerHTML]= "article.username"> </p>
                 </div>
-                <div class="shadow p-3 mx-3 bg-white rounded col-sm">
-                    <h5> Author: </h5> <p [innerHTML]= "article.aut"> </p>
+                <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
+                    <h5 class="text-center"> Category: </h5> <p class="text-center" [innerHTML]= "article.category"> </p>
                 </div>
+            </div>
+            <div class="row justify-content-between pb-5">
+                <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
+                    <!-- <h2> Body </h2>-->
+                    <blockquote class="blockquote text-center mb-5">
+                        <p class="mb-3 mt-3" [innerHTML]= "article.abstract"></p>
+                        <footer class="blockquote-footer">By<cite title="Source Title"> {{article.username}} </cite></footer>
+                      </blockquote>
+                    <p class="mb-5" [innerHTML]= "article.body"></p>
+                    <p class="text-center"> Last update: {{article.update_date}} By: {{article.username}} </p>
+                </div>
+            </div>
+            <!-- <div class="row justify-content-between pb-5">
                 <div class="shadow p-3 mx-3 bg-white rounded col-sm">
                     <h5> Last update: </h5> <p [innerHTML]= "article.update_date"> </p>
                 </div>
-                
-            </div>
-                <p [innerHTML]= "article.abstract"></p>
-                <p [innerHTML]= "article.body"></p>
-            </div>
-        </div>
-    </header>
-
-</body>
+                <div class="shadow p-3 mx-3 bg-white rounded col-sm">
+                    <h5> By: </h5> <p [innerHTML]= "article.username"> </p>
+                </div>
+            </div> -->
+</div>
  
