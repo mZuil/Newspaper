@@ -13,19 +13,34 @@
     <form #userForm="ngForm">
         <div class="row">
             <div class="col">
-              <input type="text" class="form-control" placeholder="Username" [(ngModel)]="username"  
+              <input type="text" class="form-control" required placeholder="Username" [(ngModel)]="username"  
               name="userName" 
               #userName="ngModel">
             </div>
             <div class="col">
-              <input type="text" class="form-control" placeholder="Password" [(ngModel)]="password"
+              <input type="password" class="form-control" placeholder="Password" [(ngModel)]="password"
               name="passWord" 
-              #passWord="ngModel">>
+              #passWord="ngModel">
             </div>
             <div class="col">
                 <button class="btn btn-outline-secondary" type="submit" (click)="onLogin()">Log in</button>
             </div>
           </div>
+        <!-- 
+          <div class="alert alert-light" *ngIf="userName.touched && !userName.valid">
+            <div *ngIf="userName.errors?.['required']"><button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
+              Username is required.
+            </button></div>
+       </div> -->
+          <div class="alert alert-light" *ngIf="passWord.touched && !passWord.valid">
+            <div *ngIf="passWord.errors?.['required']">Password is required.</div>
+          </div>
+
+    </form>
+</ng-template>
+
+
+
 
 <!-- <div class="inline-text">
              <input type="text" class="form-control" placeholder="Username" [(ngModel)]="username"  
@@ -36,6 +51,4 @@
                 #passWord="ngModel">
              <button class="btn btn-outline-secondary px-4 mt-5" type="submit" (click)="onLogin()">Log in</button>
         </div> -->
-    </form>
-</ng-template>
 
