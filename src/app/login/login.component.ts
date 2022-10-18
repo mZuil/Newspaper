@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../interfaces/User';
 import { LoginService } from '../services/login.service';
 
@@ -9,10 +9,39 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
+  @ViewChild('userForm') userForm: any;
+
+  user?: User | null;
+  username: string;
+  password: string;
+
+  constructor(private loginService: LoginService) { 
+    this.user = null;
+    this.username = "";
+    this.password = "";
+
+  }
 
   ngOnInit(): void {
   }
+
+  onLogin():void {
+    console.log("On login");
+    this.loginService.login(this.username, this.password).subscribe(userReturned => this.user = userReturned);
+  }
+
+  onLogout():void {
+    this.loginService.logout()
+    this.clear();
+  }
+
+  clear(): void {
+    this.userForm.reset();
+    this.username = "";
+    this.password = "";
+  }
+
+
 
   isLogged(): boolean{
     console.log(this.loginService.isLogged());
