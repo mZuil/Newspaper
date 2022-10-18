@@ -20,9 +20,12 @@
 
 <section id="content">
     <div class="container">
+        <button>Add new article</button>
         <div class="row" *ngFor="let listArticles of groupingLists; let indexFirst = index;">
-            <div *ngFor="let article of listArticles; let indexSecond = index;" [ngClass]="{'col-lg-6 col-md-12': (indexFirst % 2 == 0 && indexSecond % 3 == 0) || (indexFirst % 2 == 1 && indexSecond % 3 == 2) , 'col-lg-3 col-md-12': (indexFirst % 2 == 0 && indexSecond % 3 >= 1) || (indexFirst % 2 == 1 && indexSecond % 3 < 2)}">
-                <ng-container style="height: fit-content;" [ngTemplateOutlet]="infoNews" [ngTemplateOutletContext]="{articleElement:article}"></ng-container>
+            <div *ngFor="let article of listArticles; let indexSecond = index;"
+                [ngClass]="{'col-lg-6 col-md-12': (indexFirst % 2 == 0 && indexSecond % 3 == 0) || (indexFirst % 2 == 1 && indexSecond % 3 == 2) , 'col-lg-3 col-md-12': (indexFirst % 2 == 0 && indexSecond % 3 >= 1) || (indexFirst % 2 == 1 && indexSecond % 3 < 2)}">
+                <ng-container style="height: fit-content;" [ngTemplateOutlet]="infoNews"
+                    [ngTemplateOutletContext]="{articleElement:article}"></ng-container>
             </div>
         </div>
     </div>
@@ -32,9 +35,10 @@
 <ng-template #infoNews let-article='articleElement'>
     <div class="card card-overlay-bottom card-grid-lg card-bg-scale">
         <!--Image-->
-        <img [src]="'data:' + article.thumbnail_media_type + ';base64,' + article.thumbnail_image" style="filter: brightness(50%); object-fit:cover;">
+        <img [src]="'data:' + article.thumbnail_media_type + ';base64,' + article.thumbnail_image"
+            style="filter: brightness(50%); object-fit:cover;">
         <!-- Content -->
-        <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4"> 
+        <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4">
             <div class="mt-auto">
                 <!-- Category -->
                 <a href="#" class="badge text-bg-danger mb-2">{{article.category}}</a>
@@ -44,10 +48,35 @@
                 <p class="text-white" [innerHTML]="article.abstract"></p>
                 <!-- Card info -->
                 <p class="text-white">{{article.update_date}}</p>
-                <button class="btn btn-outline-secondary px-4 mt-5" [routerLink]="['/detail/' + article.id]"> Details </button>
+                <div class="buttons">
+                    <!--Details buttons-->
+                    <button class="btn btn-outline-secondary" [routerLink]="['/detail/', article.id]">Details</button>
+                    <!--Modify button-->
+                    <button class="btn btn-outline-secondary" *ngIf="isLogged()" [routerLink]="['/article/', article.id]">Modify</button>
+                    <!-- Delete button -->
+                    <button class="btn btn-outline-primary" *ngIf="isLogged()" (click)="openModal(mymodal, article.id)">Delete</button>
+                </div>
+                
             </div>
         </div>
     </div>
 </ng-template>
 
-
+<!--Delete modal-->
+<ng-template #mymodal let-modal let-id>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Delete article</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" (click)="modal.close()">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete the article? By clicking "Confirm" you agree that you want to delete the item.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="removeArticle(modal)">Confirm</button>
+        </div>
+    </div>
+</ng-template>
