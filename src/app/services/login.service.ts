@@ -16,14 +16,41 @@ export class LoginService {
 
   private message: string;
 
-  private httpOptions = {
-    headers: new HttpHeaders()
-      .set('Content-Type', 'x-www-form-urlencoded')
-  };
+  // private httpOptions = {
+  //   headers: new HttpHeaders()
+  //     .set('Content-Type', 'x-www-form-urlencoded')
+  // };
 
   constructor(private http: HttpClient) {
     this.message = "";
     this.user = null;
+  }
+
+  // Set the corresponding APIKEY accordig to the received by email
+  //private APIKEY?: string;
+  private APIKEY = 'ANON06_339';
+
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'apikey=' + this.APIKEY
+    })
+  };
+
+  // Modifies the APIKEY with the received value
+  setUserApiKey(apikey: string) {
+    this.APIKEY = apikey;
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'apikey=' + this.APIKEY
+      })
+    };
+    console.log('Apikey successfully changed ' + this.APIKEY);
+  }
+
+  setAnonymousApiKey() {
+    this.setUserApiKey(this.APIKEY);
   }
 
   isLogged() {
@@ -35,9 +62,12 @@ export class LoginService {
       .set('username', name)
       .set('passwd', pwd);
 
+      console.log("On login", name, pwd)
+
     return this.http.post<User>(this.loginUrl, usereq).pipe(
       tap(user => {
         this.user = user;
+        console.log(this.user, user)
       })
     );
   }
