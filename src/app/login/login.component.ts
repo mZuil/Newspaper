@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../interfaces/User';
 import { LoginService } from '../services/login.service';
+import { NewsService } from '../services/news.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(private loginService: LoginService) { 
+
+  constructor(private loginService: LoginService, private newsService: NewsService) { 
     this.user = null;
     this.username = "";
     this.password = "";
@@ -27,8 +29,11 @@ export class LoginComponent implements OnInit {
 
   onLogin():void {
     console.log("On login");
-    this.loginService.login(this.username, this.password).subscribe(userReturned => this.user = userReturned);
-  }
+    this.loginService.login(this.username, this.password).subscribe(userReturned =>{
+      this.newsService.setUserApiKey(userReturned.apikey)
+      this.user = userReturned;
+  })
+}
 
   onLogout():void {
     this.loginService.logout()
@@ -37,13 +42,12 @@ export class LoginComponent implements OnInit {
 
   clear(): void {
     this.userForm.reset();
-    this.username = "";
-    this.password = "";
   }
 
 
 
   isLogged(): boolean{
+    console.log(this.loginService.isLogged());
     return this.loginService.isLogged();
   }
 
