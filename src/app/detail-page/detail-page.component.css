@@ -1,0 +1,28 @@
+.bgDiv {
+    background-color: #EBEBEB;
+    opacity: 0.8;
+    text-align: center;}
+
+
+.imgDiv{
+    max-height: 500px;
+    min-height: 300px;}
+
+@media only screen and (max-width: 600px) {
+        .respDiv{
+            margin-bottom: 10px;
+            margin-top: 5px;
+            width: 90%;
+        }
+}
+
+.navbar.fixed-top.scrolled {
+    background-color: black !important;
+    transition: background-color 400ms linear;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
