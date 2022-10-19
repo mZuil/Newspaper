@@ -60,6 +60,9 @@ export class NewsService {
   }
 
   deleteArticle(article: Article | number): Observable<Article> {
+    if(typeof article === 'string')
+      article = Number.parseInt(article);
+    
     const id = typeof article === 'number' ? article : article.id;
     const url = `${this.articleUrl}/${id}`;
     return this.http.delete<Article>(url, this.httpOptions);
