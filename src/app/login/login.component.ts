@@ -11,14 +11,11 @@ import { NewsService } from '../services/news.service';
 export class LoginComponent implements OnInit {
 
   @ViewChild('userForm') userForm: any;
-
-  user?: User | null;
   username: string;
   password: string;
 
 
   constructor(private loginService: LoginService, private newsService: NewsService) { 
-    this.user = null;
     this.username = "";
     this.password = "";
 

@@ -1,12 +1,5 @@
 <section id="header">
     <div class="container">
-        <!--Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" appOnWindowScroll>
-            <div class="container-fluid">
-                <a class="navbar-brand theme-text" href="#">Newspaper</a>
-                <app-login></app-login>
-            </div>
-        </nav>
         <div class="middle">
             <h1 class="text-white display-3 fw-bold">To keep you informed</h1>
         </div>
@@ -49,7 +42,7 @@
                     <!--Details buttons-->
                     <button class="btn btn-outline-info" [routerLink]="['/detail/', article.id]">Details</button>
                     <!--Modify button-->
-                    <button class="btn btn-outline-light" *ngIf="isLogged()" [routerLink]="['/article/', article.id]">Modify</button>
+                    <button class="btn btn-outline-light" *ngIf="isLogged()" [routerLink]="['/modificate/', article.id]">Modify</button>
                     <!-- Delete button -->
                     <button class="btn btn-outline-warning" *ngIf="isLogged()" (click)="openModal(mymodal, article.id)">Delete</button>
                 </div>
