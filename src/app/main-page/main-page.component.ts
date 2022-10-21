@@ -9,6 +9,9 @@ import { NewsService } from '../services/news.service';
 	templateUrl: './main-page.component.html',
 	styleUrls: ['./main-page.component.css']
 })
+
+
+
 export class MainPageComponent implements OnInit {
 	articlesList?: Article[];
 	groupingLists: Article[][] = [];
@@ -30,6 +33,8 @@ export class MainPageComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getAllArticles();
+		// Bootstrap tooltip initialization
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
 	}
 
 	getAllArticles(): void {

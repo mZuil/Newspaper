@@ -1,8 +1,16 @@
 <!--Navbar-->
-<nav class="navbar navbar-dark bg-dark justify-content-between">
+<nav class="navbar navbar-dark bg-dark justify-content-between" appOnWindowScroll>
     <div class="container-fluid">
-        <button type="button" (click)="goBack()" class="btn btn-primary">Back</button>
-        <a class="navbar-brand theme-text" href="#">Newspaper</a>
+        <div class="row justify-content-center align-self-center">
+            <div class="col-auto">
+                <button type="button" (click)="goBack()" class="btn btn-dark mr-2">
+                    <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon>
+                </button>
+            </div>
+            <div class="col-auto align-self-center">
+                <a class="navbar-brand theme-text align-self-center" href="#">Newspaper</a>
+            </div>
+        </div>
         <app-login></app-login>
     </div>
 </nav>
@@ -92,13 +100,19 @@
         </div>
         <div class="col">
             <h3>Preview</h3>
-            <p>Title: {{article.title}}</p>
+            <div class="my-5 align-items-center justify-content-center imgDiv"
+                style="background:url(data:{{article.image_media_type}};base64,{{article.image_data}}); border-radius: 25px;">
+                <div class="align-items-center p-3 p-sm-4" style="background-color: #00000082; border-radius: 25px;">
+                    <span class="align-middle">
+                        <span class="badge text-bg-danger my-2">{{article.category}}</span>
+                        <br/>
+                        <h1 class="text-white display-5">{{ article.title }}</h1>
+                    </span>
+                </div>
+            </div>
             <p>Subtitle: {{article.subtitle}}</p>
-            <p>Category: {{article.category}}</p>
             <p>Abstract: {{article.abstract}}</p>
-            <p>Body: {{article.body}}</p>
-            <p>Image:</p>
-            <img [src]="'data:' + article.image_media_type + ';base64,' + article.image_data ">
+            <p [innerHtml]="article.body"></p>
 
         </div>
     </div>
