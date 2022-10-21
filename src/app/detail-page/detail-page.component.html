@@ -24,7 +24,7 @@
                 <br/>
                 <h1 class="text-white display-5">{{ article.title }}</h1>
                 <br/>
-                <p class="text-white text-center">by {{article.username}} &#183; {{article.update_date | date:"MMM d, y"}}</p>
+                <p class="text-white text-center p-subtitle">{{article.subtitle}}</p>
             </span>
         </div>
     </div>
@@ -32,7 +32,7 @@
         <div class="p-3 mx-3 bg-white rounded col-sm respDiv">
             <p class="mb-5 mt-3 abStyle">{{article.abstract}}</p>
             <p class="mb-5" [innerHTML]="article.body"></p>
-            <p class="text-center fst-italic"> Last update: {{article.update_date}} By: {{article.username}} </p>
+            <p class="text-center fst-italic"> Last update: {{article.update_date | date:"MMM d, y"}} By: {{article.username}} </p>
         </div>
     </div>
 </div>

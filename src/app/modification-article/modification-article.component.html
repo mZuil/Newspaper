@@ -17,9 +17,16 @@
 
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-6">
             <h3>Edit article</h3>
             <form #articleForm="ngForm" (ngSubmit)="sendForm()">
+                <div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Image</label>
+                        <input class="form-control" type="file" (change)="fileChangeEvent($event)">
+
+                    </div>
+                </div>
                 <div>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="aTitle" required [(ngModel)]="article.title"
@@ -82,23 +89,15 @@
                     </div>
                 </div>
 
-                <div>
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Default file input example</label>
-                        <input class="form-control" type="file" (change)="fileChangeEvent($event)">
-
-                    </div>
-                </div>
-
                 <div class="col-xs-12 my-4">
                     <div class="text-center">
                         <button class="btn btn-primary btn-lg first-button" type="submit"
-                            [disabled]="!articleForm.form.valid">Send</button>
+                            [disabled]="!articleForm.form.valid">Save</button>
                     </div>
                 </div>
             </form>
         </div>
-        <div class="col">
+        <div class="col-6">
             <h3>Preview</h3>
             <div class="my-5 align-items-center justify-content-center imgDiv"
                 style="background:url(data:{{article.image_media_type}};base64,{{article.image_data}}); border-radius: 25px;">

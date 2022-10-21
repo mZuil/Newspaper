@@ -78,9 +78,11 @@ export class MainPageComponent implements OnInit {
 	removeArticle(modal: any): void {
 		modal.close();
 		console.log(this.idDeleted);
-		this.newsService.deleteArticle(this.idDeleted).subscribe();
-		this.idDeleted = -1;
-		this.getAllArticles();
+		this.newsService.deleteArticle(this.idDeleted).subscribe(_ => {
+			this.idDeleted = -1;
+			this.getAllArticles();
+		});
+		
 	}
 
 	isLogged(): boolean {
