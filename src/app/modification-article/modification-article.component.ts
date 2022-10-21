@@ -4,7 +4,6 @@ import { NewsService } from '../services/news.service';
 import { Article } from '../interfaces/Article';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
 
 @Component({
