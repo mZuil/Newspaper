@@ -88,7 +88,8 @@ export class LoginService {
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      console.log(`${operation} failed: ${error.message}`);
+      console.log(`Login failed`);
+      window.alert("Login failed");
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
