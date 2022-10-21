@@ -23,37 +23,23 @@
                             <h5 class="pt-3 fst-italic"> {{article.subtitle}} </h5>
                         </span>
                     </div>
+                    </div>
+                </span>
                 </div>
-            </span>
-        </div>
-    </header>
-    <div class="row justify-content-between pb-5">
-        <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
-            <h5 class="text-center"> Author: </h5>
-            <p class="text-center" [innerHTML]="article.username"> </p>
-        </div>
-        <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
-            <h5 class="text-center"> Category: </h5>
-            <p class="text-center" [innerHTML]="article.category"> </p>
-        </div>
-    </div>
-    <div class="row justify-content-between pb-5">
-        <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
-            <!-- <h2> Body </h2>-->
-            <blockquote class="blockquote text-center mb-5">
-                <p class="mb-3 mt-3" [innerHTML]="article.abstract"></p>
-                <footer class="blockquote-footer">By<cite title="Source Title"> {{article.username}} </cite></footer>
-            </blockquote>
-            <p class="mb-5" [innerHTML]="article.body"></p>
-            <p class="text-center"> Last update: {{article.update_date}} By: {{article.username}} </p>
-        </div>
-    </div>
-    <!-- <div class="row justify-content-between pb-5">
-                <div class="shadow p-3 mx-3 bg-white rounded col-sm">
-                    <h5> Last update: </h5> <p [innerHTML]= "article.update_date"> </p>
+                </header>
+            <div class="row justify-content-between pb-5">
+                <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
+                    <h5 class="text-center fw-bold"> Author: </h5> <p class="text-center" [innerHTML]= "article.username"> </p>
                 </div>
-                <div class="shadow p-3 mx-3 bg-white rounded col-sm">
-                    <h5> By: </h5> <p [innerHTML]= "article.username"> </p>
+                <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
+                    <h5 class="text-center fw-bold"> Category: </h5> <p class="text-center" [innerHTML]= "article.category"> </p>
                 </div>
-            </div> -->
+            </div>
+            <div class="row justify-content-between pb-5">
+                <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
+                    <p class="mb-5 mt-3 abStyle">{{article.abstract}}</p>
+                    <p class="mb-5" [innerHTML]= "article.body"></p>
+                    <p class="text-center fst-italic"> Last update: {{article.update_date}} By: {{article.username}} </p>
+                </div>
+            </div>
 </div>
