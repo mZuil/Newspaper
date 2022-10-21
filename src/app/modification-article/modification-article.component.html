@@ -15,6 +15,8 @@
     </div>
 </nav>
 
+<notifier-container></notifier-container>
+
 <div class="container">
     <div class="row">
         <div class="col-12 col-lg-6 card my-4 p-0">
@@ -105,22 +107,24 @@
             </div>
         </div>
         <div class="col-12 col-lg-6 p-4">
-            <h3>Preview</h3>
-            <div class="my-5 align-items-center justify-content-center imgDiv"
+            <div class="align-items-center justify-content-center imgDiv"
                 style="background:url(data:{{article.image_media_type}};base64,{{article.image_data}}); border-radius: 25px;">
                 <div class="align-items-center p-3 p-sm-4" style="background-color: #00000082; border-radius: 25px;">
                     <span class="align-middle">
-                        <span class="badge text-bg-danger my-2">{{article.category}}</span>
+                        <span class="badge text-bg-danger my-2"> {{ article.category }} </span>
                         <br/>
-                        <h1 class="text-white display-5">{{ article.title }}</h1>
+                        <h1 class="text-white display-5 text-center"> {{ article.title }} </h1>
                         <br/>
-                        <p class="text-white text-center p-subtitle">{{article.subtitle}}</p>
+                        <h5 class="text-white text-center"> {{ article.subtitle }} </h5>
                     </span>
                 </div>
             </div>
-            <p>Abstract: {{article.abstract}}</p>
-            <p [innerHtml]="article.body"></p>
-
+            <div class="row justify-content-between pb-5">
+                <div class="mx-3 shadow p-3 bg-white col-sm" style="border-radius: 25px;">
+                    <p class="mb-5 mt-3 text-center fw-bold" [innerHTML]= "article.abstract"></p>
+                    <p class="mb-5" [innerHTML]= "article.body"></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

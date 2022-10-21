@@ -5,6 +5,7 @@ import { Article } from '../interfaces/Article';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
 	selector: 'app-modification-article',
@@ -13,6 +14,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModificationArticleComponent implements OnInit {
 
+	private readonly notifier: NotifierService;
+
 	@ViewChild('articleForm') articleForm: any;
 	article: Article;
 	id: number;
@@ -20,7 +23,8 @@ export class ModificationArticleComponent implements OnInit {
 	isImageSaved?: boolean;
 	cardImageBase64?: string;
 
-	constructor(private location: Location, private newsService: NewsService, private route: ActivatedRoute, private modalService: NgbModal) {
+	constructor(private location: Location, private newsService: NewsService, private route: ActivatedRoute, private notifierService: NotifierService) {
+		this.notifier = this.notifierService;
 		this.article = {} as Article;
 		const idStr = this.route.snapshot.paramMap.get('id');
 		if (idStr != null) {
@@ -40,16 +44,19 @@ export class ModificationArticleComponent implements OnInit {
 
 	sendForm(): void {
 		this.addArticle();
-		window.alert("The article has been created correctly");
-		this.goBack();
+		var that = this;
+		setTimeout(function () {that.goBack();}, 3000);
+		
 	}
 
 	addArticle(): void {
 		const newArticle = this.article;
 		if(this.id == -1){
 			this.newsService.createArticle(newArticle).subscribe();
+			this.notifier.notify('success', 'The article has been created correctly');
 		} else {
 			this.newsService.updateArticle(newArticle).subscribe();
+			this.notifier.notify('success', 'The article has been modified correctly');
 		}
 		
 	}
@@ -94,9 +101,5 @@ export class ModificationArticleComponent implements OnInit {
 
 	goBack(): void {
 		this.location.back();
-	}
-
-	openModal(content: any) {
-		const activeModal = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
 	}
 }
