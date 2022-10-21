@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   password: string;
 
 
-  constructor(private loginService: LoginService, private newsService: NewsService) { 
+  constructor(private loginService: LoginService, private newsService: NewsService) {
     this.user = null;
     this.username = "";
     this.password = "";
@@ -27,14 +27,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onLogin():void {
+  onLogin(): void {
     console.log("On login");
-    this.loginService.login(this.username, this.password).subscribe(userReturned =>{
+    this.loginService.login(this.username, this.password).subscribe(userReturned => {
       this.newsService.setUserApiKey(userReturned.apikey);
-  })
-}
+    })
+  }
 
-  onLogout():void {
+  onLogout(): void {
     this.loginService.logout();
     this.newsService.setAnonymousApiKey();
     sessionStorage.removeItem('currentUser');
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
 
 
 
-  isLogged(): boolean{
+  isLogged(): boolean {
     return this.loginService.isLogged();
   }
 

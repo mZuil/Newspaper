@@ -1,6 +1,5 @@
 <section id="header">
     <div class="container">
-        <!--Navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" appOnWindowScroll>
             <div class="container-fluid">
                 <a class="navbar-brand theme-text" href="#">Newspaper</a>
@@ -11,49 +10,93 @@
             <h1 class="text-white display-3 fw-bold">To keep you informed</h1>
         </div>
     </div>
-    <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <!-- <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path fill="#fff" fill-opacity="1"
             d="M0,192L60,181.3C120,171,240,149,360,133.3C480,117,600,107,720,106.7C840,107,960,117,1080,122.7C1200,128,1320,128,1380,128L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
         </path>
-    </svg>
+    </svg> -->
 </section>
 
 <section id="content">
     <div class="container">
-        <button>Add new article</button>
-        <div class="row" *ngFor="let listArticles of groupingLists; let indexFirst = index;">
-            <div *ngFor="let article of listArticles; let indexSecond = index;"
-                [ngClass]="{'col-lg-6 col-md-12': (indexFirst % 2 == 0 && indexSecond % 3 == 0) || (indexFirst % 2 == 1 && indexSecond % 3 == 2) , 'col-lg-3 col-md-12': (indexFirst % 2 == 0 && indexSecond % 3 >= 1) || (indexFirst % 2 == 1 && indexSecond % 3 < 2)}">
-                <ng-container style="height: fit-content;" [ngTemplateOutlet]="infoNews"
-                    [ngTemplateOutletContext]="{articleElement:article}"></ng-container>
+        <div class="row mb-3 justify-content-between">
+            <div class="col-auto">
+                <div ngbDropdown>
+                    <button type="button" class="btn btn-outline-primary" id="categoryFilterDropdown"
+                        ngbDropdownToggle>Filters</button>
+                    <div ngbDropdownMenu aria-labelledby="categoryFilterDropdown" class="px-2">
+                        <div *ngFor="let category of filterCategories; let i = index;">
+                            <div class="form-check">
+                                <input mdbCheckbox class="form-check-input" type="checkbox" value="{{category.name}}"
+                                    id="filterCategory{{i}}" (change)="addFilter(category.name)"
+                                    [checked]="category.value" />
+                                <label class="form-check-label" for="filterCategory{{i}}">{{category.name}}</label>
+                            </div>
+                        </div>
+                        <button ngbDropdownItem (click)="getAllArticles()" class="btn">Apply filters</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="row">
+                    <div class="col-auto">
+                        <input type="text" class="form-control d-inline" placeholder="Keyword" [(ngModel)]="keyword"
+                            name="keyword">
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-primary d-inline"
+                            (click)="getAllArticles()">Search</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- <button>Add new article</button> -->
+        <div class="row justify-content-evenly">
+            <div *ngFor="let article of articlesList; let i = index;" class="my-2 col-4 same-height">
+                <ng-container [ngTemplateOutlet]="infoNews" [ngTemplateOutletContext]="{articleElement:article}">
+                </ng-container>
             </div>
         </div>
     </div>
 </section>
 
+
+
 <!--Template with the content of a card-->
 <ng-template #infoNews let-article='articleElement'>
-    <div class="card card-overlay-bottom card-grid-lg card-bg-scale h-100" style='background: url(data:{{article.thumbnail_media_type}};base64,{{article.thumbnail_image}}), no-repeat; background-size: cover;'>
-        <!-- Content -->
-        <div class="p-4">
-            <div class="mt-auto">
-                <!-- Category -->
-                <a href="#" class="badge text-bg-danger mb-2">{{article.category}}</a>
-                <!-- Card title -->
-                <h2 class="text-white h1">{{article.title}}</h2>
-                <h3 class="text-white h5">{{article.subtitle}}</h3>
-                <p class="text-white" [innerHTML]="article.abstract"></p>
-                <!-- Card info -->
-                <p class="text-white">{{article.update_date}}</p>
-                <div class="buttons btn-group btn-group-toggle w-100">
-                    <!--Details buttons-->
-                    <button class="btn btn-outline-info" [routerLink]="['/detail/', article.id]">Details</button>
-                    <!--Modify button-->
-                    <button class="btn btn-outline-light" *ngIf="isLogged()" [routerLink]="['/article/', article.id]">Modify</button>
-                    <!-- Delete button -->
-                    <button class="btn btn-outline-warning" *ngIf="isLogged()" (click)="openModal(mymodal, article.id)">Delete</button>
+    <div class="d-flex article-container flex-column">
+        <div class="col">
+            <img class="img-responsive article-image"
+                src="data:{{article.thumbnail_media_type}};base64,{{article.thumbnail_image}}" alt="Placeholder image">
+            <br>
+            <div class="row">
+                <div class="col-auto" *ngIf="isLogged()">
+                    <button class="btn btn-sm btn-outline-secondary rounded-2 mt-1" type="button"
+                        [routerLink]="['/modificate/', article.id]">
+                        <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
+                    </button>
                 </div>
-                
+                <div class="col-auto">
+                    <span class="badge text-bg-danger my-2">{{article.category}}</span>
+                </div>
+            </div>
+            <br>
+            <span class="text-summary" style="font-size: 12px;">{{article.update_date | date:'short'}}</span>
+            <br>
+            <span class="bold-small">{{article.title}}</span>
+            <br>
+            <span class="text-summary" style="font-size: 14px;">{{article.subtitle}}</span>
+            <br>
+        </div>
+        <div class="row mt-auto mt-4 justify-content-between" style="text-align: right;">
+            <div class="col-auto mt-4">
+                <button class="btn btn-primary" [routerLink]="['/detail/', article.id]">Read article</button>
+            </div>
+            <div class="col-auto mt-auto" *ngIf="isLogged()">
+                <button class="btn btn-sm btn-outline-danger rounded-2" (click)="openModal(mymodal, article.id)">
+                    <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+                </button>
             </div>
         </div>
     </div>
@@ -69,7 +112,10 @@
             </button>
         </div>
         <div class="modal-body">
-            <p>Are you sure you want to delete the article? By clicking "Confirm" you agree that you want to delete the item.</p>
+            <p>
+                Are you sure you want to delete the article? <br/>
+                By clicking "Confirm" you agree that you want to delete the item.
+            </p>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cancel</button>
@@ -77,3 +123,13 @@
         </div>
     </div>
 </ng-template>
+
+
+<footer class="bg-light text-center text-lg-start mt-5">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 Copyright:
+        <a class="text-dark" href="#">Team 06</a>
+    </div>
+    <!-- Copyright -->
+</footer>

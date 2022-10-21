@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,4 +37,8 @@ import { FormsModule } from '@angular/forms';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
+  }
+}
