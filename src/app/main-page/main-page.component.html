@@ -111,8 +111,10 @@
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Delete article</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true" (click)="modal.close()">&times;</span>
+            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" (click)="modal.close()">
+                    <fa-icon [icon]="['fas', 'times']"></fa-icon>
+                </span>
             </button>
         </div>
         <div class="modal-body">
