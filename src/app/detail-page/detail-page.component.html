@@ -1,10 +1,14 @@
 <nav class="navbar navbar-dark bg-dark justify-content-between" appOnWindowScroll>
     <div class="container-fluid">
-       <div>
-        <button  type="button" (click)="goBack()" class="btn btn-dark"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-          </svg></button>
-        <a class="navbar-brand theme-text" href="#">Newspaper</a>
+        <div class="row justify-content-center align-self-center">
+            <div class="col-auto">
+                <button type="button" (click)="goBack()" class="btn btn-dark mr-2">
+                    <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon>
+                </button>
+            </div>
+            <div class="col-auto align-self-center">
+                <a class="navbar-brand theme-text align-self-center" href="#">Newspaper</a>
+            </div>
         </div>
         <app-login></app-login>
     </div>
@@ -12,34 +16,23 @@
 
 <div class="container">
     <!-- Header-->
-    <header class="masthead text-center mt-5">
-        <div class="masthead-content">
-            <span class="overlay-text">
-                <div class="shadow p-3 mb-5 bg-white rounded d-flex align-items-center justify-content-center imgDiv"
-                    style="background:url(data:{{article.image_media_type}};base64,{{article.image_data}}); background-size: cover;">
-                    <div class="p-2 mb-3 rounded d-flex align-items-center justify-content-center bgDiv">
-                        <span class="align-middle">
-                            <h1 class="display-3 fw-bold">{{ article.title }}</h1>
-                            <h5 class="pt-3 fst-italic"> {{article.subtitle}} </h5>
-                        </span>
-                    </div>
-                    </div>
-                </span>
-                </div>
-                </header>
-            <div class="row justify-content-between pb-5">
-                <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
-                    <h5 class="text-center fw-bold"> Author: </h5> <p class="text-center" [innerHTML]= "article.username"> </p>
-                </div>
-                <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
-                    <h5 class="text-center fw-bold"> Category: </h5> <p class="text-center" [innerHTML]= "article.category"> </p>
-                </div>
-            </div>
-            <div class="row justify-content-between pb-5">
-                <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
-                    <p class="mb-5 mt-3 abStyle">{{article.abstract}}</p>
-                    <p class="mb-5" [innerHTML]= "article.body"></p>
-                    <p class="text-center fst-italic"> Last update: {{article.update_date}} By: {{article.username}} </p>
-                </div>
-            </div>
+    <div class="my-5 align-items-center justify-content-center imgDiv"
+        style="background:url(data:{{article.image_media_type}};base64,{{article.image_data}}); border-radius: 25px;">
+        <div class="align-items-center p-3 p-sm-4" style="background-color: #00000082; border-radius: 25px;">
+            <span class="align-middle">
+                <span class="badge text-bg-danger my-2">{{article.category}}</span>
+                <br/>
+                <h1 class="text-white display-5">{{ article.title }}</h1>
+                <br/>
+                <p class="text-white text-center">by {{article.username}} &#183; {{article.update_date | date:"MMM d, y"}}</p>
+            </span>
+        </div>
+    </div>
+    <div class="row justify-content-between pb-5">
+        <div class="p-3 mx-3 bg-white rounded col-sm respDiv">
+            <p class="mb-5 mt-3 abStyle">{{article.abstract}}</p>
+            <p class="mb-5" [innerHTML]="article.body"></p>
+            <p class="text-center fst-italic"> Last update: {{article.update_date}} By: {{article.username}} </p>
+        </div>
+    </div>
 </div>
