@@ -46,7 +46,7 @@ export class MainPageComponent implements OnInit {
 			if (!this.filterCategories.find(c => c.value && c.name == this.filterAll)) {
 				articleList = articleList.filter(article => this.filterCategories.find(c => c.name == article.category && c.value) != undefined);
 			}
-			console.log(articleList);
+			
 			this.articlesList = articleList;
 			for (let i = 0; i < this.articlesList.length / 3; i++) {
 				this.groupingLists.push(this.articlesList.slice(i * 3, i * 3 + 3));
@@ -77,7 +77,6 @@ export class MainPageComponent implements OnInit {
 	//A function to delete one article by using the id of the article
 	removeArticle(modal: any): void {
 		modal.close();
-		console.log(this.idDeleted);
 		this.newsService.deleteArticle(this.idDeleted).subscribe(_ => {
 			this.idDeleted = -1;
 			this.getAllArticles();

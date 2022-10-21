@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    console.log("On login");
     this.loginService.login(this.username, this.password).subscribe(userReturned => {
       this.newsService.setUserApiKey(userReturned.apikey);
     })
