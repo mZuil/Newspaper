@@ -2,7 +2,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" appOnWindowScroll>
             <div class="container-fluid">
-                <a class="navbar-brand theme-text" href="#">Newspaper</a>
+                <a class="navbar-brand theme-text" href="#"><fa-icon [icon]="['fas', 'newspaper']"></fa-icon>&nbsp;&nbsp;Newspaper</a>
                 <app-login></app-login>
             </div>
         </nav>
@@ -44,7 +44,7 @@
                     <div class="col-auto" *ngIf="isLogged()">
                         <button type="button" class="btn btn-outline-dark d-inline" [routerLink]="['/create/']" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create article">
                             <fa-icon [icon]="['fas', 'plus']"></fa-icon>
-                            &nbsp;Create article
+                            &nbsp;Create
                         </button>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                 <div class="col-auto" *ngIf="isLogged()">
                     <button class="btn btn-sm btn-outline-secondary rounded-2 mt-1" type="button" [routerLink]="['/modificate/', article.id]">
                         <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
-                        &nbsp;Modify article
+                        &nbsp;Modify
                     </button>
                 </div>
                 <div class="col-auto">

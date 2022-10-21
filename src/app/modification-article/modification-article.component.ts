@@ -4,6 +4,7 @@ import { NewsService } from '../services/news.service';
 import { Article } from '../interfaces/Article';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
 	selector: 'app-modification-article',
@@ -19,7 +20,7 @@ export class ModificationArticleComponent implements OnInit {
 	isImageSaved?: boolean;
 	cardImageBase64?: string;
 
-	constructor(private location: Location, private newsService: NewsService, private route: ActivatedRoute) {
+	constructor(private location: Location, private newsService: NewsService, private route: ActivatedRoute, private modalService: NgbModal) {
 		this.article = {} as Article;
 		const idStr = this.route.snapshot.paramMap.get('id');
 		if (idStr != null) {
@@ -39,7 +40,7 @@ export class ModificationArticleComponent implements OnInit {
 
 	sendForm(): void {
 		this.addArticle();
-		window.alert("Tha article has been submitted correctly");
+		window.alert("The article has been created correctly");
 		this.goBack();
 	}
 
@@ -93,5 +94,9 @@ export class ModificationArticleComponent implements OnInit {
 
 	goBack(): void {
 		this.location.back();
+	}
+
+	openModal(content: any) {
+		const activeModal = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
 	}
 }
