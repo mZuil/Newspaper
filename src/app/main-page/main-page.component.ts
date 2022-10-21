@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Article } from '../interfaces/Article';
 import { LoginService } from '../services/login.service';
 import { NewsService } from '../services/news.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
 	selector: 'app-main-page',
@@ -13,6 +14,9 @@ import { NewsService } from '../services/news.service';
 
 
 export class MainPageComponent implements OnInit {
+
+	private readonly notifier: NotifierService;
+
 	articlesList?: Article[];
 	groupingLists: Article[][] = [];
 	idDeleted: number;
@@ -27,14 +31,13 @@ export class MainPageComponent implements OnInit {
 		{ name: "Technology", value: true },
 	];
 
-	constructor(private newsService: NewsService, private loginService: LoginService, private modalService: NgbModal) {
+	constructor(private newsService: NewsService, private loginService: LoginService, private modalService: NgbModal, private notifierService: NotifierService) {
 		this.idDeleted = -1;
+		this.notifier = this.notifierService;
 	}
 
 	ngOnInit(): void {
 		this.getAllArticles();
-		// Bootstrap tooltip initialization
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
 	}
 
 	getAllArticles(): void {
@@ -46,7 +49,7 @@ export class MainPageComponent implements OnInit {
 			if (!this.filterCategories.find(c => c.value && c.name == this.filterAll)) {
 				articleList = articleList.filter(article => this.filterCategories.find(c => c.name == article.category && c.value) != undefined);
 			}
-			console.log(articleList);
+			
 			this.articlesList = articleList;
 			for (let i = 0; i < this.articlesList.length / 3; i++) {
 				this.groupingLists.push(this.articlesList.slice(i * 3, i * 3 + 3));
@@ -77,20 +80,28 @@ export class MainPageComponent implements OnInit {
 	//A function to delete one article by using the id of the article
 	removeArticle(modal: any): void {
 		modal.close();
-		console.log(this.idDeleted);
-		this.newsService.deleteArticle(this.idDeleted).subscribe(_ => {
-			this.idDeleted = -1;
-			this.getAllArticles();
-		});
+		this.newsService.deleteArticle(this.idDeleted).subscribe(
+			_ => {
+				this.idDeleted = -1;
+				this.getAllArticles();
+				this.notifier.notify('success', 'Article successfully deleted');
+			},
+			//Error
+			_ => {
+				this.notifier.notify('error', "Error while deleting the article");
+			}
+		);
 		
 	}
 
+	//A function that checks if the user is logged
 	isLogged(): boolean {
 		return this.loginService.isLogged();
 	}
 
+	//A function that opens a modal
 	openModal(content: any, id: number) {
-		const activeModal = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
 		this.idDeleted = id;
 	}
 }

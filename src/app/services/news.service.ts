@@ -20,6 +20,8 @@ export class NewsService {
   private APIKEY?: string;
   private APIKEY_ANON = 'ANON06_339';
 
+  error: string = "";
+
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -55,7 +57,9 @@ export class NewsService {
   //  "thumbnail_media_type":...}
 
   getArticles(): Observable<Article[]> {
-    return this.http.get<Article[]>(this.newsUrl, this.httpOptions);
+    return this.http.get<Article[]>(this.newsUrl, this.httpOptions).pipe(
+      tap((articleList: Article[]) => console.log(`Retrieving article list with length ${articleList.length}`)),
+      catchError(this.handleError<Article[]>('getArticles')));
   }
 
   deleteArticle(article: Article | number): Observable<Article> {
@@ -63,7 +67,10 @@ export class NewsService {
       article = Number.parseInt(article);
     const id = typeof article === 'number' ? article : article.id;
     const url = `${this.articleUrl}/${id}`;
-    return this.http.delete<Article>(url, this.httpOptions);
+    return this.http.delete<Article>(url, this.httpOptions).pipe(
+      tap((article: Article) => console.log(`Deleting article with id ${article.id}`)),
+      catchError(this.handleError<Article>('getArticle'))
+    );
   }
 
 
@@ -82,18 +89,37 @@ export class NewsService {
   getArticle(id: number): Observable<Article> {
     console.log('Requesting article id=' + id);
     const url = `${this.articleUrl}/${id}`;
-    return this.http.get<Article>(url, this.httpOptions);
+    return this.http.get<Article>(url, this.httpOptions).pipe(
+      tap((article: Article) => console.log(`Retrieving article with id=${article.id}`)),
+      catchError(this.handleError<Article>('getArticle'))
+    );
 
   }
 
   updateArticle(article: Article): Observable<Article> {
     console.log('Updating article id=' + article.id);
-    return this.http.post<Article>(this.articleUrl, article, this.httpOptions);
+    return this.http.post<Article>(this.articleUrl, article, this.httpOptions).pipe(
+      tap((article: Article) => console.log(`Updating article with id=${article.id}`)),
+      catchError(this.handleError<Article>('updateArticle'))
+    );
   }
 
   createArticle(article: Article): Observable<Article> {
     console.log('Creating article');
     console.log(article);
-    return this.http.post<Article>(this.articleUrl, article, this.httpOptions);
+    return this.http.post<Article>(this.articleUrl, article, this.httpOptions).pipe(
+      tap((article: Article) => console.log(`Creating article with id=${article.id}`)),
+      catchError(this.handleError<Article>('createArticle'))
+    );
+  }
+
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(`${operation} failed: ${error.message}`);
+      console.error(error);
+      this.error = `${operation} failed: ${error.message}`;
+      return of(result as T);
+    };
   }
 }
