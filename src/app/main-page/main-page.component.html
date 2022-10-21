@@ -35,12 +35,17 @@
             <div class="col-auto">
                 <div class="row">
                     <div class="col-auto">
-                        <input type="text" class="form-control d-inline" placeholder="Keyword" [(ngModel)]="keyword"
-                            name="keyword">
+                        <input type="text" class="form-control d-inline" placeholder="Keyword" [(ngModel)]="keyword" name="keyword">
                     </div>
                     <div class="col-auto">
                         <button type="button" class="btn btn-primary d-inline"
                             (click)="getAllArticles()">Search</button>
+                    </div>
+                    <div class="col-auto" *ngIf="isLogged()">
+                        <button type="button" class="btn btn-outline-dark d-inline" [routerLink]="['/create/']" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create article">
+                            <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+                            &nbsp;Create article
+                        </button>
                     </div>
                 </div>
 
@@ -62,14 +67,16 @@
 <ng-template #infoNews let-article='articleElement'>
     <div class="d-flex article-container flex-column">
         <div class="col">
-            <img class="img-responsive article-image"
+            <a [routerLink]="['/detail/', article.id]">
+                <img class="img-responsive article-image"
                 src="data:{{article.thumbnail_media_type}};base64,{{article.thumbnail_image}}" alt="Placeholder image">
+            </a>
             <br>
             <div class="row">
                 <div class="col-auto" *ngIf="isLogged()">
-                    <button class="btn btn-sm btn-outline-secondary rounded-2 mt-1" type="button"
-                        [routerLink]="['/modificate/', article.id]">
+                    <button class="btn btn-sm btn-outline-secondary rounded-2 mt-1" type="button" [routerLink]="['/modificate/', article.id]">
                         <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
+                        &nbsp;Modify article
                     </button>
                 </div>
                 <div class="col-auto">
@@ -79,7 +86,9 @@
             <br>
             <span class="text-summary" style="font-size: 12px;">{{article.update_date | date:'short'}}</span>
             <br>
-            <span class="bold-small">{{article.title}}</span>
+            <a class="enter-details" [routerLink]="['/detail/', article.id]">
+                <span class="bold-small">{{article.title}}</span>
+            </a>
             <br>
             <span class="text-summary" style="font-size: 14px;">{{article.subtitle}}</span>
             <br>
