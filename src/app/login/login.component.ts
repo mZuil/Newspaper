@@ -42,10 +42,12 @@ export class LoginComponent implements OnInit {
     this.userForm.reset();
   }
 
-
-
   isLogged(): boolean {
     return this.loginService.isLogged();
+  }
+
+  getUser(): User | null {
+    return this.loginService.getUser();
   }
 
 }

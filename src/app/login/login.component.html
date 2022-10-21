@@ -1,7 +1,7 @@
 <div *ngIf="isLogged(); else notLogged">
   <div class="row">
     <div class="col">
-      <p class="userForm1">Hello, {{username}}</p>
+      <p class="userForm1">Hello, {{getUser()?.username}}</p>
     </div>
     <div class="col">
       <button type="submit" class="btn btn-outline-secondary" (click)="onLogout()">Log out</button>
