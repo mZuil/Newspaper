@@ -8,99 +8,100 @@
 </nav>
 
 <div class="container">
-    <h3>Edit article</h3>
-    <form #articleForm="ngForm" (ngSubmit)="sendForm()">
-        <div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" 
-                    id="aTitle"                     
-                    required 
-                    [(ngModel)]="article.title"
-                    name="aTitle"
-                    #aTitle="ngModel" 
-                    aria-label="Title of the article" 
-                    placeholder="Insert here the title..."
-                />
-                <label for="aTitle">Title</label>
-            </div>
-            <div class="alert alert-danger mt-2" *ngIf="aTitle.touched && !aTitle.valid">
-                <div *ngIf="aTitle.errors?.['required']">Title is required.</div>
-            </div>
-        </div>
+    <div class="row">
+        <div class="col">
+            <h3>Edit article</h3>
+            <form #articleForm="ngForm" (ngSubmit)="sendForm()">
+                <div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="aTitle" required [(ngModel)]="article.title"
+                            name="aTitle" #aTitle="ngModel" aria-label="Title of the article"
+                            placeholder="Insert here the title..." />
+                        <label for="aTitle">Title</label>
+                    </div>
+                    <div class="alert alert-danger mt-2" *ngIf="aTitle.touched && !aTitle.valid">
+                        <div *ngIf="aTitle.errors?.['required']">Title is required.</div>
+                    </div>
+                </div>
 
-        <div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" 
-                    id="aSubtitle"                     
-                    required 
-                    [(ngModel)]="article.subtitle"
-                    name="aSubtitle"
-                    #aSubtitle="ngModel" 
-                    aria-label="Subtitle of the article" 
-                    placeholder="Insert here the subtitle..."
-                />
-                <label for="aSubtitle">Subtitle</label>
-            </div>
-            <div class="alert alert-danger mt-2" *ngIf="aSubtitle.touched && !aSubtitle.valid">
-                <div *ngIf="aSubtitle.errors?.['required']">Subtitle is required.</div>
-            </div>
-        </div>
-    
-        <div>
-            <div class="mb-3">
-                <span>Category</span>
-                <select class="form-select" aria-label="Default select example" required [(ngModel)]="article.category" name="aCategory" #aCategory="ngModel">
-                    <option value="National" [selected]="article.category == 'National'">National</option>
-                    <option value="Economy" [selected]="article.category == 'Economy'">Economy</option>
-                    <option value="Sports" [selected]="article.category == 'Sports'">Sports</option>
-                    <option value="Technology" [selected]="article.category == 'Technology'">Technology</option>
-                </select>
-            </div>
-        </div>
-    
-        <div>
-            <div class="">
-                <span class="w-7">Abstract</span>
-                <angular-editor 
-                    [placeholder]="'Insert here the abstract...'" 
-                    [(ngModel)]="article.abstract"
-                    required
-                    name="aAbstract"
-                    #aAbstract="ngModel"
-                    id="aAbstract"
-                    aria-label="Abstract of the article" >
-                </angular-editor>
-            </div>
-            <div class="alert alert-danger mt-2" *ngIf="aAbstract.touched && !aAbstract.valid">
-                <div *ngIf="aAbstract.errors?.['required']">Abstract is required.</div>
-            </div>
-        </div>
+                <div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="aSubtitle" required [(ngModel)]="article.subtitle"
+                            name="aSubtitle" #aSubtitle="ngModel" aria-label="Subtitle of the article"
+                            placeholder="Insert here the subtitle..." />
+                        <label for="aSubtitle">Subtitle</label>
+                    </div>
+                    <div class="alert alert-danger mt-2" *ngIf="aSubtitle.touched && !aSubtitle.valid">
+                        <div *ngIf="aSubtitle.errors?.['required']">Subtitle is required.</div>
+                    </div>
+                </div>
 
-        <div>
-            <div class="">
-                <span class="w-7">Body</span>
-                <angular-editor 
-                    [placeholder]="'Insert here the body...'" 
-                    [(ngModel)]="article.body" name="aBody"
-                    #aBody="ngModel"
-                    aria-label="Body of the article" >
-                </angular-editor>
-            </div>
+                <div>
+                    <div class="mb-3">
+                        <span>Category</span>
+                        <select class="form-select" aria-label="Default select example" required
+                            [(ngModel)]="article.category" name="aCategory" #aCategory="ngModel">
+                            <option value="National" [selected]="article.category == 'National'">National</option>
+                            <option value="Economy" [selected]="article.category == 'Economy'">Economy</option>
+                            <option value="Sports" [selected]="article.category == 'Sports'">Sports</option>
+                            <option value="Technology" [selected]="article.category == 'Technology'">Technology</option>
+                        </select>
+                    </div>
+                    <div class="alert alert-danger mt-2" *ngIf="aCategory.touched && !aCategory.valid">
+                        <div *ngIf="aCategory.errors?.['required']">Category is required.</div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="">
+                        <span class="w-7">Abstract</span>
+                        <angular-editor [placeholder]="'Insert here the abstract...'" [(ngModel)]="article.abstract"
+                            required name="aAbstract" #aAbstract="ngModel" id="aAbstract"
+                            aria-label="Abstract of the article">
+                        </angular-editor>
+                    </div>
+                    <div class="alert alert-danger mt-2" *ngIf="aAbstract.touched && !aAbstract.valid">
+                        <div *ngIf="aAbstract.errors?.['required']">Abstract is required.</div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="">
+                        <span class="w-7">Body</span>
+                        <angular-editor [placeholder]="'Insert here the body...'" [(ngModel)]="article.body"
+                            name="aBody" #aBody="ngModel" aria-label="Body of the article">
+                        </angular-editor>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Default file input example</label>
+                        <input class="form-control" type="file" (change)="fileChangeEvent($event)">
+
+                    </div>
+                </div>
+
+                <div class="col-xs-12 my-4">
+                    <div class="text-center">
+                        <button class="btn btn-primary btn-lg first-button" type="submit"
+                            [disabled]="!articleForm.form.valid">Send</button>
+                    </div>
+                </div>
+            </form>
         </div>
-    
-        <div>
-            <div class="mb-3">
-                <label for="formFile" class="form-label">Default file input example</label>
-                <input class="form-control" type="file" (change)="fileChangeEvent($event)">
-    
-            </div>
+        <div class="col">
+            <h3>Preview</h3>
+            <p>Title: {{article.title}}</p>
+            <p>Subtitle: {{article.subtitle}}</p>
+            <p>Category: {{article.category}}</p>
+            <p>Abstract: {{article.abstract}}</p>
+            <p>Body: {{article.body}}</p>
+            <p>Image:</p>
+            <img [src]="'data:' + article.image_media_type + ';base64,' + article.image_data ">
+
         </div>
-    
-        <div class="col-xs-12 my-4">
-            <div  class="text-center">
-                <button class="btn btn-primary btn-lg first-button" type="submit" [disabled]="!articleForm.form.valid">Send</button>
-            </div>
-        </div>
-    </form>
-    
+    </div>
+
+
 </div>

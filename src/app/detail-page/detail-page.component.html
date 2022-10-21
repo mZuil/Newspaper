@@ -14,38 +14,41 @@
     <!-- Header-->
     <header class="masthead text-center mt-5">
         <div class="masthead-content">
-                <span class="overlay-text">
-                    <div class="shadow p-3 mb-5 bg-white rounded d-flex align-items-center justify-content-center imgDiv" style="background:url(data:{{article.image_media_type}};base64,{{article.image_data}}); background-size: cover;">
-                        <div class="p-2 mb-3 rounded d-flex align-items-center justify-content-center bgDiv">
-                            <span class="align-middle">
-                                <h1 class="display-3 fw-bold">{{ article.title }}</h1>
-                                <h5 class="pt-3 fst-italic"> {{article.subtitle}} </h5>
-                            </span>
+            <span class="overlay-text">
+                <div class="shadow p-3 mb-5 bg-white rounded d-flex align-items-center justify-content-center imgDiv"
+                    style="background:url(data:{{article.image_media_type}};base64,{{article.image_data}}); background-size: cover;">
+                    <div class="p-2 mb-3 rounded d-flex align-items-center justify-content-center bgDiv">
+                        <span class="align-middle">
+                            <h1 class="display-3 fw-bold">{{ article.title }}</h1>
+                            <h5 class="pt-3 fst-italic"> {{article.subtitle}} </h5>
+                        </span>
                     </div>
-                    </div>
-                </span>
                 </div>
-                </header>
-            <div class="row justify-content-between pb-5">
-                <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
-                    <h5 class="text-center"> Author: </h5> <p class="text-center" [innerHTML]= "article.username"> </p>
-                </div>
-                <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
-                    <h5 class="text-center"> Category: </h5> <p class="text-center" [innerHTML]= "article.category"> </p>
-                </div>
-            </div>
-            <div class="row justify-content-between pb-5">
-                <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
-                    <!-- <h2> Body </h2>-->
-                    <blockquote class="blockquote text-center mb-5">
-                        <p class="mb-3 mt-3" [innerHTML]= "article.abstract"></p>
-                        <footer class="blockquote-footer">By<cite title="Source Title"> {{article.username}} </cite></footer>
-                      </blockquote>
-                    <p class="mb-5" [innerHTML]= "article.body"></p>
-                    <p class="text-center"> Last update: {{article.update_date}} By: {{article.username}} </p>
-                </div>
-            </div>
-            <!-- <div class="row justify-content-between pb-5">
+            </span>
+        </div>
+    </header>
+    <div class="row justify-content-between pb-5">
+        <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
+            <h5 class="text-center"> Author: </h5>
+            <p class="text-center" [innerHTML]="article.username"> </p>
+        </div>
+        <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
+            <h5 class="text-center"> Category: </h5>
+            <p class="text-center" [innerHTML]="article.category"> </p>
+        </div>
+    </div>
+    <div class="row justify-content-between pb-5">
+        <div class="shadow p-3 mx-3 bg-white rounded col-sm respDiv">
+            <!-- <h2> Body </h2>-->
+            <blockquote class="blockquote text-center mb-5">
+                <p class="mb-3 mt-3" [innerHTML]="article.abstract"></p>
+                <footer class="blockquote-footer">By<cite title="Source Title"> {{article.username}} </cite></footer>
+            </blockquote>
+            <p class="mb-5" [innerHTML]="article.body"></p>
+            <p class="text-center"> Last update: {{article.update_date}} By: {{article.username}} </p>
+        </div>
+    </div>
+    <!-- <div class="row justify-content-between pb-5">
                 <div class="shadow p-3 mx-3 bg-white rounded col-sm">
                     <h5> Last update: </h5> <p [innerHTML]= "article.update_date"> </p>
                 </div>
@@ -54,4 +57,3 @@
                 </div>
             </div> -->
 </div>
- 
