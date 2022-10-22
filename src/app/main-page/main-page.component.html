@@ -97,12 +97,9 @@
             <br>
         </div>
         <div class="row mt-auto mt-4 justify-content-between" style="text-align: right;">
-            <div class="col-auto mt-4">
-                <button class="btn btn-primary" [routerLink]="['/detail/', article.id]">Read article</button>
-            </div>
             <div class="col-auto mt-auto" *ngIf="isLogged()">
                 <button class="btn btn-sm btn-outline-danger rounded-2" (click)="openModal(mymodal, article.id)">
-                    <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+                    <fa-icon [icon]="['fas', 'trash']"></fa-icon> Delate
                 </button>
             </div>
         </div>
