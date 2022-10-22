@@ -38,6 +38,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-auto" *ngIf="isLogged()">
+                        <button type="button" class="btn btn-outline-primary d-inline" [routerLink]="['/create/']"
+                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create article">
+                            <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+                            &nbsp;Create
+                        </button>
+                    </div>
                 </div>
             </div>
         </nav>
