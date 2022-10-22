@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from '../interfaces/User';
 
@@ -16,18 +16,11 @@ export class LoginService {
 
   private message: string;
 
-  // private httpOptions = {
-  //   headers: new HttpHeaders()
-  //     .set('Content-Type', 'x-www-form-urlencoded')
-  // };
-
   constructor(private http: HttpClient) {
     this.message = "";
     this.user = null;
   }
 
-  // Set the corresponding APIKEY accordig to the received by email
-  //private APIKEY?: string;
   private APIKEY = 'ANON06_339';
 
   private httpOptions = {
@@ -37,7 +30,6 @@ export class LoginService {
     })
   };
 
-  // Modifies the APIKEY with the received value
   setUserApiKey(apikey: string) {
     this.APIKEY = apikey;
     this.httpOptions = {
@@ -46,7 +38,6 @@ export class LoginService {
         Authorization: 'apikey=' + this.APIKEY
       })
     };
-    console.log('Apikey successfully changed ' + this.APIKEY);
   }
 
   setAnonymousApiKey() {
@@ -61,8 +52,6 @@ export class LoginService {
     const usereq = new HttpParams()
       .set('username', name)
       .set('passwd', pwd);
-
-      console.log("On login", name, pwd)
 
     return this.http.post<User>(this.loginUrl, usereq).pipe(
       tap(user => {
@@ -84,14 +73,12 @@ export class LoginService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       this.user = null;
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
 
-      // TODO: better job of transforming error for user consumption
+      console.error(error);
+
       console.log(`Login failed`);
       window.alert("Login failed");
 
-      // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }

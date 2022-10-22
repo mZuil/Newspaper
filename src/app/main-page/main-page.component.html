@@ -1,18 +1,4 @@
-<section id="header">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" appOnWindowScroll>
-            <div class="container-fluid">
-                <a class="navbar-brand theme-text" href="#">
-                    <fa-icon [icon]="['fas', 'newspaper']"></fa-icon>&nbsp;&nbsp;Newspaper
-                </a>
-                <app-login></app-login>
-            </div>
-        </nav>
-        <div class="middle">
-            <h1 class="text-white display-3 fw-bold">To keep you informed</h1>
-        </div>
-    </div>
-</section>
+<app-navbar [canGoBack]="false"></app-navbar>
 
 <notifier-container></notifier-container>
 
@@ -57,7 +43,7 @@
         </nav>
         <!-- <button>Add new article</button> -->
         <div class="row justify-content-evenly">
-            <div *ngFor="let article of articlesList; let i = index;" class="my-2 col-4 same-height">
+            <div *ngFor="let article of articlesList; let i = index;" class="my-2 col-lg-4 same-height">
                 <ng-container [ngTemplateOutlet]="infoNews" [ngTemplateOutletContext]="{articleElement:article}">
                 </ng-container>
             </div>
@@ -98,7 +84,7 @@
         <div class="row mt-auto mt-4" style="text-align: right;">
             <div class="col-auto mt-auto" *ngIf="isLogged()">
                 <button class="btn btn-sm btn-outline-secondary rounded-2 mt-1" type="button"
-                    [routerLink]="['/modificate/', article.id]">
+                    [routerLink]="['/edit/', article.id]">
                     <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
                     &nbsp;Modify
                 </button>
@@ -136,12 +122,4 @@
     </div>
 </ng-template>
 
-
-<footer class="bg-light text-center text-lg-start mt-5">
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2022 Copyright
-        <p class="text-dark">Alessandro Cavallotti, Ginevra Fedrizzi, Maria Zuil Gonzalez, Fani-Marina Kalamara</p>
-    </div>
-    <!-- Copyright -->
-</footer>
+<app-footer></app-footer>

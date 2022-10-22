@@ -1,0 +1,25 @@
+<section [ngClass]="{'header': !canGoBack}">
+    <div [ngClass]="{'container': !canGoBack}">
+        <nav class="navbar navbar-dark" [ngClass]="{
+            'navbar-expand-lg fixed-top': !canGoBack,
+            'bg-dark justify-content-between': canGoBack}"
+            appOnWindowScroll>
+            <div class="container-fluid">
+                <div class="row justify-content-center align-self-center">
+                    <div class="col-auto" *ngIf="canGoBack">
+                        <button type="button" (click)="goBack()" class="btn btn-dark mr-2">
+                            <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon>
+                        </button>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        <a class="navbar-brand theme-text" href="#"><fa-icon [icon]="['fas', 'newspaper']"></fa-icon>&nbsp;&nbsp;Newspaper</a>
+                    </div>
+                </div>
+                <app-login></app-login>
+            </div>
+        </nav>
+        <div class="middle" *ngIf="!canGoBack">
+            <h1 class="text-white display-3 fw-bold">To keep you informed</h1>
+        </div>
+    </div>
+</section>

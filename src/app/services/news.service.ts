@@ -3,7 +3,6 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoginService } from './login.service';
 import { Article } from '../interfaces/Article';
 
 @Injectable({
@@ -16,7 +15,6 @@ export class NewsService {
 
   constructor(private http: HttpClient) { }
 
-  // Set the corresponding APIKEY accordig to the received by email
   private APIKEY?: string;
   private APIKEY_ANON = 'ANON06_339';
 

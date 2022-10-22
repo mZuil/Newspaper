@@ -7,9 +7,9 @@ import { ModificationArticleComponent } from './modification-article/modificatio
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: MainPageComponent },
-  { path: 'detail/:articleId', component: DetailPageComponent }, 
-  {path: 'modificate/:id', component: ModificationArticleComponent},
-  {path: 'create', component: ModificationArticleComponent}
+  { path: 'detail/:articleId', component: DetailPageComponent },
+  { path: 'edit/:id', component: ModificationArticleComponent },
+  { path: 'create', component: ModificationArticleComponent }
 ];
 
 @NgModule({
@@ -19,7 +19,7 @@ const routes: Routes = [
 export class AppRoutingModule {
   constructor(private router: Router) {
     this.router.errorHandler = (error: any) => {
-        this.router.navigate(['']); // when the URL does not match redirect to initial default route
+      this.router.navigate(['']); // when the URL does not match redirect to initial default route
     }
   }
 }

@@ -1,41 +1,42 @@
 <!-- Check if user is logged -->
 <div *ngIf="isLogged(); else notLogged">
   <!-- if user is logged, provide message Hello username -->
-  <div class="row">
-      <p class="userForm1">Hello, {{getUser()?.username}}<button type="submit" class="btn btn-outline-secondary btnLogin" (click)="onLogout()">Log out</button></p>
+  <div class="row justify-content-center align-self-center">
+    <div class="col-auto align-self-center">
+      <span class="align-self-center text-white">Hello, {{getUser()?.username}}</span>
+    </div>
+    <div class="col-auto align-self-center">
+      <button type="submit" class="btn btn-sm btn-outline-secondary align-self-center btnLogout" (click)="onLogout()">Log out</button>
+    </div>
   </div>
 </div>
 
 <!-- Execute if user is not yet logged in -->
 <ng-template #notLogged>
-    <form #userForm="ngForm">
-      <div class="row">
-        <div class="col">
-          <input type="text" class="form-control" required placeholder="Username" [(ngModel)]="username"  
-          name="userName" 
+  <form #userForm="ngForm">
+    <div class="row align-self-center mt-2">
+      <div class="col-6 col-md-auto align-self-center mt-2">
+        <input type="text" class="form-control" required placeholder="Username" [(ngModel)]="username" name="userName"
           #userName="ngModel">
-        </div>
-        <div class="col">
-          <input type="password" class="form-control" required placeholder="Password" [(ngModel)]="password"
-          name="passWord" 
-          #passWord="ngModel">
-        </div>
-        <div class="col">
-          <button class="btn btn-outline-secondary" type="submit" [disabled]="!userForm.form.valid" (click)="onLogin()">Log in</button>
-        </div>
       </div>
-        
-      <br>
+      <div class="col-6 col-md-auto align-self-center mt-2">
+        <input type="password" class="form-control" required placeholder="Password" [(ngModel)]="password"
+          name="passWord" #passWord="ngModel">
+      </div>
+      <div class="col-auto mt-2">
+        <button class="btn btn-success btnLogin" type="submit" [disabled]="!userForm.form.valid" (click)="onLogin()">Log in</button>
+      </div>
+    </div>
+  </form>
 
-      <!-- Alert for username -->
-      <div class="alert alert-danger mt-2" *ngIf="userName.touched && !userName.valid">
-        <div *ngIf="userName.errors?.['required']">Username is required.</div>
-      </div>
-          
-      <!-- Alert for password -->
-      <div class="alert alert-danger mt-2" *ngIf="passWord.touched && !passWord.valid">
-        <div *ngIf="passWord.errors?.['required']">Password is required.</div>
-      </div>
+  <!-- Alert for username -->
+  <div class="alert alert-danger mt-2" *ngIf="userName.touched && !userName.valid">
+    <div *ngIf="userName.errors?.['required']">Username is required.</div>
+  </div>
 
-     </form>
+  <!-- Alert for password -->
+  <div class="alert alert-danger mt-2" *ngIf="passWord.touched && !passWord.valid">
+    <div *ngIf="passWord.errors?.['required']">Password is required.</div>
+  </div>
+
 </ng-template>

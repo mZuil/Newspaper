@@ -11,6 +11,6 @@ export interface Article {
     username?: string,
     body?: string,
     image_data?: string,
-	image_description?: string,
+    image_description?: string,
     image_media_type?: string,
 }

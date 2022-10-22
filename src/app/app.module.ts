@@ -16,6 +16,8 @@ import { OnWindowScrollDirective } from './directives/on-window-scroll.directive
 import { DetailPageComponent } from './detail-page/detail-page.component';
 import { ModificationArticleComponent } from './modification-article/modification-article.component';
 import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     OnWindowScrollDirective,
     DetailPageComponent,
-    ModificationArticleComponent
+    ModificationArticleComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
