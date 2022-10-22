@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   message: string;
 
 
-  constructor(private loginService: LoginService, private newsService: NewsService) { 
+  constructor(private loginService: LoginService, private newsService: NewsService) {
     this.username = "";
     this.password = "";
     this.message = "";
@@ -30,20 +30,20 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void {
     this.loginAttempt = true;
-    this.loginService.login(this.username, this.password).subscribe(userReturned =>
-    {
+    this.loginService.login(this.username, this.password).subscribe(userReturned => {
       this.newsService.setUserApiKey(userReturned.apikey);
       this.clear();
     },
-    error => {
-      Swal.fire({
-      icon: 'error',
-      title: 'Wrong Credentials',
-      text: 'Username or Password are incorrect!',
-      footer: 'Please try again.'
-    })
-    }
-  )}
+      error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Wrong Credentials',
+          text: 'Username or Password are incorrect!',
+          footer: 'Please try again.'
+        })
+      }
+    )
+  }
 
   onLogout(): void {
     this.loginService.logout();

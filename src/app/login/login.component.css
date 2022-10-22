@@ -1,8 +1,15 @@
-.userForm1 {
-    /* margin-top: 23%; */
-    color: rgb(170, 172, 173);
-  }
+@media only screen and (max-width: 634px) {
+    .btnLogin {
+        position: absolute;
+        top: 14px;
+        right: 16px;
+    }
+}
 
-  .btnLogin{ 
-    margin-left: 10px; 
-  } 
+@media only screen and (max-width: 350px) {
+    .btnLogout {
+        position: absolute;
+        top: 14px;
+        right: 16px;
+    }
+}

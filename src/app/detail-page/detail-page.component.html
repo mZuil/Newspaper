@@ -1,18 +1,4 @@
-<nav class="navbar navbar-dark bg-dark justify-content-between" appOnWindowScroll>
-    <div class="container-fluid">
-        <div class="row justify-content-center align-self-center">
-            <div class="col-auto">
-                <button type="button" (click)="goBack()" class="btn btn-dark mr-2">
-                    <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon>
-                </button>
-            </div>
-            <div class="col-auto align-self-center">
-                <a class="navbar-brand theme-text" href="#"><fa-icon [icon]="['fas', 'newspaper']"></fa-icon>&nbsp;&nbsp;Newspaper</a>
-            </div>
-        </div>
-        <app-login></app-login>
-    </div>
-</nav>
+<app-navbar [canGoBack]="true"></app-navbar>
 
 <div class="container">
     <!-- Header-->
@@ -21,18 +7,20 @@
         <div class="align-items-center p-3 p-sm-4" style="background-color: #00000082; border-radius: 25px;">
             <span class="align-middle">
                 <span class="badge text-bg-danger my-2"> {{ article.category }} </span>
-                <br/>
+                <br />
                 <h1 class="text-white display-5 text-center"> {{ article.title }} </h1>
-                <br/>
+                <br />
                 <p class="text-white text-center p-subtitle">{{article.subtitle}}</p>
             </span>
         </div>
     </div>
-    <div class="row justify-content-between pb-5">
+    <div class="col justify-content-between pb-5">
         <div class="mx-3 shadow p-3 bg-white col-sm" style="border-radius: 25px;">
-            <p class="mb-5 mt-3 text-center fw-bold"> {{ article.abstract }} </p>
-            <p class="mb-5" [innerHTML]= "article.body"></p>
+            <p class="mb-5 mt-3 text-center fw-bold" [innerHTML]="article.abstract"></p>
+            <p class="mb-5" [innerHTML]="article.body"></p>
             <p class="text-center fst-italic"> Last update: {{article.update_date}} By: {{article.username}} </p>
         </div>
     </div>
 </div>
+
+<app-footer></app-footer>

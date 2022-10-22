@@ -44,20 +44,20 @@ export class ModificationArticleComponent implements OnInit {
 	sendForm(): void {
 		this.addArticle();
 		var that = this;
-		setTimeout(function () {that.goBack();}, 3000);
-		
+		setTimeout(function () { that.goBack(); }, 3000);
+
 	}
 
 	addArticle(): void {
 		const newArticle = this.article;
-		if(this.id == -1){
+		if (this.id == -1) {
 			this.newsService.createArticle(newArticle).subscribe();
 			this.notifier.notify('success', 'The article has been created correctly');
 		} else {
 			this.newsService.updateArticle(newArticle).subscribe();
 			this.notifier.notify('success', 'The article has been modified correctly');
 		}
-		
+
 	}
 
 	fileChangeEvent(fileInput: any) {

@@ -10,9 +10,6 @@ import { NotifierService } from 'angular-notifier';
 	templateUrl: './main-page.component.html',
 	styleUrls: ['./main-page.component.css']
 })
-
-
-
 export class MainPageComponent implements OnInit {
 
 	private readonly notifier: NotifierService;
@@ -45,7 +42,7 @@ export class MainPageComponent implements OnInit {
 	getAllArticles(): void {
 		this.newsService.getArticles().subscribe(articleList => {
 			this.groupingLists = [];
-			if(this.keyword) {
+			if (this.keyword) {
 				articleList = articleList.filter(article => article.title?.toLocaleLowerCase().includes(this.keyword?.toLocaleLowerCase() ?? ""));
 			}
 
@@ -53,12 +50,6 @@ export class MainPageComponent implements OnInit {
 				articleList = articleList.filter(article => this.selectedCategory == article.category);
 				console.log(articleList);
 			}
-			
-			/* Filtering for more than one category
-			if (!this.filterCategories.find(c => c.value && c.name == this.filterAll)) {
-				articleList = articleList.filter(article => this.filterCategories.find(c => c.name == article.category && c.value) != undefined);
-			}
-			*/
 
 			this.articlesList = articleList;
 			for (let i = 0; i < this.articlesList.length / 3; i++) {
@@ -66,28 +57,6 @@ export class MainPageComponent implements OnInit {
 			}
 		});
 	}
-
-	/* Function for choosing more categories
-	addFilter(category: string): void {
-		let notAll = false;
-		let isAll = false;
-		this.filterCategories.forEach(c => {
-			if (c.name == category) {
-				c.value = !c.value;
-				if (!c.value && c.name != this.filterAll)
-					notAll = true;
-				if (c.value && c.name == this.filterAll)
-					isAll = true;
-			}
-			if (isAll) {
-				c.value = true;
-			}
-		});
-		if (notAll) {
-			this.filterCategories[0].value = false;
-		}
-	}
-	*/
 
 	//A function to delete one article by using the id of the article
 	removeArticle(modal: any): void {
@@ -103,7 +72,6 @@ export class MainPageComponent implements OnInit {
 				this.notifier.notify('error', "Error while deleting the article");
 			}
 		);
-		
 	}
 
 	//A function that checks if the user is logged
