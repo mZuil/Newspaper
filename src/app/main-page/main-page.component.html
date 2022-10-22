@@ -2,7 +2,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" appOnWindowScroll>
             <div class="container-fluid">
-                <a class="navbar-brand theme-text" href="#">Newspaper</a>
+                <a class="navbar-brand theme-text" href="#"><fa-icon [icon]="['fas', 'newspaper']"></fa-icon>&nbsp;&nbsp;Newspaper</a>
                 <app-login></app-login>
             </div>
         </nav>
@@ -11,6 +11,8 @@
         </div>
     </div>
 </section>
+
+<notifier-container></notifier-container>
 
 <section id="content">
     <div class="container">
@@ -70,14 +72,16 @@
 <ng-template #infoNews let-article='articleElement'>
     <div class="d-flex article-container flex-column">
         <div class="col">
-            <img class="img-responsive article-image"
+            <a [routerLink]="['/detail/', article.id]">
+                <img class="img-responsive article-image"
                 src="data:{{article.thumbnail_media_type}};base64,{{article.thumbnail_image}}" alt="Placeholder image">
+            </a>
             <br>
             <div class="row">
                 <div class="col-auto" *ngIf="isLogged()">
-                    <button class="btn btn-sm btn-outline-secondary rounded-2 mt-1" type="button"
-                        [routerLink]="['/modificate/', article.id]">
+                    <button class="btn btn-sm btn-outline-secondary rounded-2 mt-1" type="button" [routerLink]="['/modificate/', article.id]">
                         <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
+                        &nbsp;Modify
                     </button>
                 </div>
                 <div class="col-auto">
@@ -87,7 +91,9 @@
             <br>
             <span class="text-summary" style="font-size: 12px;">{{article.update_date | date:'short'}}</span>
             <br>
-            <span class="bold-small">{{article.title}}</span>
+            <a class="enter-details" [routerLink]="['/detail/', article.id]">
+                <span class="bold-small">{{article.title}}</span>
+            </a>
             <br>
             <span class="text-summary" style="font-size: 14px;">{{article.subtitle}}</span>
             <br>
@@ -110,8 +116,10 @@
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Delete article</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true" (click)="modal.close()">&times;</span>
+            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" (click)="modal.close()">
+                    <fa-icon [icon]="['fas', 'times']"></fa-icon>
+                </span>
             </button>
         </div>
         <div class="modal-body">
@@ -131,8 +139,8 @@
 <footer class="bg-light text-center text-lg-start mt-5">
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2022 Copyright:
-        <a class="text-dark" href="#">Team 06</a>
+        © 2022 Copyright
+        <p class="text-dark">Alessandro Cavallotti, Ginevra Fedrizzi, Maria Zuil Gonzalez, Fani-Marina Kalamara</p>
     </div>
     <!-- Copyright -->
 </footer>

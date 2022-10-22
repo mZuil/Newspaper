@@ -1,54 +1,41 @@
+<!-- Check if user is logged -->
 <div *ngIf="isLogged(); else notLogged">
+  <!-- if user is logged, provide message Hello username -->
   <div class="row">
-    <div class="col">
-      <p class="userForm1">Hello, {{getUser()?.username}}</p>
-    </div>
-    <div class="col">
-      <button type="submit" class="btn btn-outline-secondary" (click)="onLogout()">Log out</button>
-    </div>
+      <p class="userForm1">Hello, {{getUser()?.username}}<button type="submit" class="btn btn-outline-secondary btnLogin" (click)="onLogout()">Log out</button></p>
   </div>
 </div>
 
+<!-- Execute if user is not yet logged in -->
 <ng-template #notLogged>
     <form #userForm="ngForm">
-        <div class="row">
-            <div class="col">
-              <input type="text" class="form-control" required placeholder="Username" [(ngModel)]="username"  
-              name="userName" 
-              #userName="ngModel">
-            </div>
-            <div class="col">
-              <input type="password" class="form-control" placeholder="Password" [(ngModel)]="password"
-              name="passWord" 
-              #passWord="ngModel">
-            </div>
-            <div class="col">
-                <button class="btn btn-outline-secondary" type="submit" (click)="onLogin()">Log in</button>
-            </div>
-          </div>
-        <!-- 
-          <div class="alert alert-light" *ngIf="userName.touched && !userName.valid">
-            <div *ngIf="userName.errors?.['required']"><button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
-              Username is required.
-            </button></div>
-       </div> -->
-          <div class="alert alert-light" *ngIf="passWord.touched && !passWord.valid">
-            <div *ngIf="passWord.errors?.['required']">Password is required.</div>
-          </div>
+      <div class="row">
+        <div class="col">
+          <input type="text" class="form-control" required placeholder="Username" [(ngModel)]="username"  
+          name="userName" 
+          #userName="ngModel">
+        </div>
+        <div class="col">
+          <input type="password" class="form-control" required placeholder="Password" [(ngModel)]="password"
+          name="passWord" 
+          #passWord="ngModel">
+        </div>
+        <div class="col">
+          <button class="btn btn-outline-secondary" type="submit" [disabled]="!userForm.form.valid" (click)="onLogin()">Log in</button>
+        </div>
+      </div>
+        
+      <br>
 
-    </form>
+      <!-- Alert for username -->
+      <div class="alert alert-danger mt-2" *ngIf="userName.touched && !userName.valid">
+        <div *ngIf="userName.errors?.['required']">Username is required.</div>
+      </div>
+          
+      <!-- Alert for password -->
+      <div class="alert alert-danger mt-2" *ngIf="passWord.touched && !passWord.valid">
+        <div *ngIf="passWord.errors?.['required']">Password is required.</div>
+      </div>
+
+     </form>
 </ng-template>
-
-
-
-
-<!-- <div class="inline-text">
-             <input type="text" class="form-control" placeholder="Username" [(ngModel)]="username"  
-                name="userName" 
-                #userName="ngModel">
-             <input type="password" class="form-control" placeholder="Password" [(ngModel)]="password"
-                name="passWord" 
-                #passWord="ngModel">
-             <button class="btn btn-outline-secondary px-4 mt-5" type="submit" (click)="onLogin()">Log in</button>
-        </div> -->
-
