@@ -48,7 +48,6 @@ export class MainPageComponent implements OnInit {
 
 			if (this.selectedCategory != this.filterAll) {
 				articleList = articleList.filter(article => this.selectedCategory == article.category);
-				console.log(articleList);
 			}
 
 			this.articlesList = articleList;
