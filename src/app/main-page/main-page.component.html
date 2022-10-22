@@ -2,7 +2,9 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" appOnWindowScroll>
             <div class="container-fluid">
-                <a class="navbar-brand theme-text" href="#"><fa-icon [icon]="['fas', 'newspaper']"></fa-icon>&nbsp;&nbsp;Newspaper</a>
+                <a class="navbar-brand theme-text" href="#">
+                    <fa-icon [icon]="['fas', 'newspaper']"></fa-icon>&nbsp;&nbsp;Newspaper
+                </a>
                 <app-login></app-login>
             </div>
         </nav>
@@ -16,43 +18,40 @@
 
 <section id="content">
     <div class="container">
-        <div class="row mb-3 justify-content-between">
-            <div class="col-auto">
-                <div ngbDropdown>
-                    <button type="button" class="btn btn-outline-primary" id="categoryFilterDropdown"
-                        ngbDropdownToggle>Filters</button>
-                    <div ngbDropdownMenu aria-labelledby="categoryFilterDropdown" class="px-2">
-                        <div *ngFor="let category of filterCategories; let i = index;">
-                            <div class="form-check">
-                                <input mdbCheckbox class="form-check-input" type="checkbox" value="{{category.name}}"
-                                    id="filterCategory{{i}}" (change)="addFilter(category.name)"
-                                    [checked]="category.value" />
-                                <label class="form-check-label" for="filterCategory{{i}}">{{category.name}}</label>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white mb-3">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button"
+                    (click)="isMenuCollapsed = !isMenuCollapsed">&#9776;</button>
+                <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse row justify-content-between">
+                    <div class="col-auto my-2">
+                        <div class="btn-group">
+                            <div *ngFor="let category of filterCategories; let i = index;">
+                                <input type="radio" class="btn-check" name="categoryFilters" id="categoryFilter{{i}}"
+                                    value="{{category.name}}" [(ngModel)]="selectedCategory"
+                                    (change)="getAllArticles();" />
+                                <label class="btn btn-sm btn-light mx-1"
+                                    for="categoryFilter{{i}}">{{category.name}}</label>
                             </div>
                         </div>
-                        <button ngbDropdownItem (click)="getAllArticles()" class="btn">Apply filters</button>
+                    </div>
+                    <div class="col-auto my-2">
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="input-group">
+                                    <input type="text" class="form-control py-2 border-right-0 border"
+                                        placeholder="Keyword" [(ngModel)]="keyword" name="keyword">
+                                    <button type="button" (click)="clearInput()" class="input-group-text bg-transparent"><fa-icon *ngIf="keyword != undefined" [icon]="['fas', 'times']"></fa-icon></button>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-primary d-inline"
+                                    (click)="getAllArticles()">Search</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-auto">
-                <div class="row">
-                    <div class="col-auto">
-                        <input type="text" class="form-control d-inline" placeholder="Keyword" [(ngModel)]="keyword" name="keyword">
-                    </div>
-                    <div class="col-auto">
-                        <button type="button" class="btn btn-primary d-inline"
-                            (click)="getAllArticles()">Search</button>
-                    </div>
-                    <div class="col-auto" *ngIf="isLogged()">
-                        <button type="button" class="btn btn-outline-dark d-inline" [routerLink]="['/create/']" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create article">
-                            <fa-icon [icon]="['fas', 'plus']"></fa-icon>
-                            &nbsp;Create
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        </nav>
         <!-- <button>Add new article</button> -->
         <div class="row justify-content-evenly">
             <div *ngFor="let article of articlesList; let i = index;" class="my-2 col-4 same-height">
@@ -71,12 +70,14 @@
         <div class="col">
             <a [routerLink]="['/detail/', article.id]">
                 <img class="img-responsive article-image"
-                src="data:{{article.thumbnail_media_type}};base64,{{article.thumbnail_image}}" alt="Placeholder image">
+                    src="data:{{article.thumbnail_media_type}};base64,{{article.thumbnail_image}}"
+                    alt="Placeholder image">
             </a>
             <br>
             <div class="row">
                 <div class="col-auto" *ngIf="isLogged()">
-                    <button class="btn btn-sm btn-outline-secondary rounded-2 mt-1" type="button" [routerLink]="['/modificate/', article.id]">
+                    <button class="btn btn-sm btn-outline-secondary rounded-2 mt-1" type="button"
+                        [routerLink]="['/modificate/', article.id]">
                         <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
                         &nbsp;Modify
                     </button>
@@ -121,7 +122,7 @@
         </div>
         <div class="modal-body">
             <p>
-                Are you sure you want to delete the article? <br/>
+                Are you sure you want to delete the article? <br />
                 By clicking "Confirm" you agree that you want to delete the item.
             </p>
         </div>

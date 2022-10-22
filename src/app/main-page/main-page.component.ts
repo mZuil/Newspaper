@@ -21,6 +21,8 @@ export class MainPageComponent implements OnInit {
 	groupingLists: Article[][] = [];
 	idDeleted: number;
 	keyword?: string;
+	selectedCategory: string = "All";
+	isMenuCollapsed: boolean = true;
 
 	filterAll = "All";
 	filterCategories: Array<any> = [
@@ -46,10 +48,18 @@ export class MainPageComponent implements OnInit {
 			if(this.keyword) {
 				articleList = articleList.filter(article => article.title?.toLocaleLowerCase().includes(this.keyword?.toLocaleLowerCase() ?? ""));
 			}
+
+			if (this.selectedCategory != this.filterAll) {
+				articleList = articleList.filter(article => this.selectedCategory == article.category);
+				console.log(articleList);
+			}
+			
+			/* Filtering for more than one category
 			if (!this.filterCategories.find(c => c.value && c.name == this.filterAll)) {
 				articleList = articleList.filter(article => this.filterCategories.find(c => c.name == article.category && c.value) != undefined);
 			}
-			
+			*/
+
 			this.articlesList = articleList;
 			for (let i = 0; i < this.articlesList.length / 3; i++) {
 				this.groupingLists.push(this.articlesList.slice(i * 3, i * 3 + 3));
@@ -57,6 +67,7 @@ export class MainPageComponent implements OnInit {
 		});
 	}
 
+	/* Function for choosing more categories
 	addFilter(category: string): void {
 		let notAll = false;
 		let isAll = false;
@@ -76,6 +87,7 @@ export class MainPageComponent implements OnInit {
 			this.filterCategories[0].value = false;
 		}
 	}
+	*/
 
 	//A function to delete one article by using the id of the article
 	removeArticle(modal: any): void {
@@ -103,5 +115,9 @@ export class MainPageComponent implements OnInit {
 	openModal(content: any, id: number) {
 		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
 		this.idDeleted = id;
+	}
+
+	clearInput() {
+		this.keyword = undefined;
 	}
 }
