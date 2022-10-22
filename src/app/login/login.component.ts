@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     this.loginAttempt = true;
     this.loginService.login(this.username, this.password).subscribe(userReturned => {
-      this.newsService.setUserApiKey(userReturned.apiKey);
+      this.newsService.setUserApiKey(userReturned.apikey);
       this.clear();
     },
       error => {

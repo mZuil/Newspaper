@@ -16,7 +16,7 @@
     </div>
     <div class="col justify-content-between pb-5">
         <div class="mx-3 shadow p-3 bg-white col-sm" style="border-radius: 25px;">
-            <p class="mb-5 mt-3 text-center fw-bold"> {{ article.abstract }} </p>
+            <p class="mb-5 mt-3 text-center fw-bold" [innerHTML]="article.abstract"></p>
             <p class="mb-5" [innerHTML]="article.body"></p>
             <p class="text-center fst-italic"> Last update: {{article.update_date}} By: {{article.username}} </p>
         </div>
