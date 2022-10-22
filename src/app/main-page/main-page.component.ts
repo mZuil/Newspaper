@@ -116,4 +116,8 @@ export class MainPageComponent implements OnInit {
 		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
 		this.idDeleted = id;
 	}
+
+	clearInput() {
+		this.keyword = undefined;
+	}
 }

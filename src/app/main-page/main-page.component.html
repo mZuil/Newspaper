@@ -2,7 +2,9 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" appOnWindowScroll>
             <div class="container-fluid">
-                <a class="navbar-brand theme-text" href="#"><fa-icon [icon]="['fas', 'newspaper']"></fa-icon>&nbsp;&nbsp;Newspaper</a>
+                <a class="navbar-brand theme-text" href="#">
+                    <fa-icon [icon]="['fas', 'newspaper']"></fa-icon>&nbsp;&nbsp;Newspaper
+                </a>
                 <app-login></app-login>
             </div>
         </nav>
@@ -35,8 +37,11 @@
                     <div class="col-auto my-2">
                         <div class="row">
                             <div class="col-auto">
-                                <input type="text" class="form-control d-inline" placeholder="Keyword"
-                                    [(ngModel)]="keyword" name="keyword">
+                                <div class="input-group">
+                                    <input type="text" class="form-control py-2 border-right-0 border"
+                                        placeholder="Keyword" [(ngModel)]="keyword" name="keyword">
+                                    <button type="button" (click)="clearInput()" class="input-group-text bg-transparent"><fa-icon *ngIf="keyword != undefined" [icon]="['fas', 'times']"></fa-icon></button>
+                                </div>
                             </div>
                             <div class="col-auto">
                                 <button type="button" class="btn btn-primary d-inline"
@@ -65,12 +70,14 @@
         <div class="col">
             <a [routerLink]="['/detail/', article.id]">
                 <img class="img-responsive article-image"
-                src="data:{{article.thumbnail_media_type}};base64,{{article.thumbnail_image}}" alt="Placeholder image">
+                    src="data:{{article.thumbnail_media_type}};base64,{{article.thumbnail_image}}"
+                    alt="Placeholder image">
             </a>
             <br>
             <div class="row">
                 <div class="col-auto" *ngIf="isLogged()">
-                    <button class="btn btn-sm btn-outline-secondary rounded-2 mt-1" type="button" [routerLink]="['/modificate/', article.id]">
+                    <button class="btn btn-sm btn-outline-secondary rounded-2 mt-1" type="button"
+                        [routerLink]="['/modificate/', article.id]">
                         <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
                         &nbsp;Modify
                     </button>

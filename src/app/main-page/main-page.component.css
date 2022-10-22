@@ -54,3 +54,13 @@ nav{
     color: rgb(104, 102, 102);
     transition: 300ms;
 }
+
+.border-right-0 {
+    border-right: 0px !important;
+}
+
+.form-control:focus {
+    outline: 0 !important;
+    border-color: initial;
+    box-shadow: none;
+}
