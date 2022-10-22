@@ -40,7 +40,10 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control py-2 border-right-0 border"
                                         placeholder="Keyword" [(ngModel)]="keyword" name="keyword">
-                                    <button type="button" (click)="clearInput()" class="input-group-text bg-transparent"><fa-icon *ngIf="keyword != undefined" [icon]="['fas', 'times']"></fa-icon></button>
+                                    <button type="button" (click)="clearInput()"
+                                        class="input-group-text bg-transparent">
+                                        <fa-icon *ngIf="keyword != undefined" [icon]="['fas', 'times']"></fa-icon>
+                                    </button>
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -68,19 +71,13 @@
 <ng-template #infoNews let-article='articleElement'>
     <div class="d-flex article-container flex-column">
         <div class="col">
-            <a [routerLink]="['/detail/', article.id]">
-                <img class="img-responsive article-image"
-                    src="data:{{article.thumbnail_media_type}};base64,{{article.thumbnail_image}}"
-                    alt="Placeholder image">
-            </a>
-            <br>
             <div class="row">
-                <div class="col-auto" *ngIf="isLogged()">
-                    <button class="btn btn-sm btn-outline-secondary rounded-2 mt-1" type="button"
-                        [routerLink]="['/modificate/', article.id]">
-                        <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
-                        &nbsp;Modify
-                    </button>
+                <div class="col-auto">
+                    <a [routerLink]="['/detail/', article.id]">
+                        <img class="img-responsive article-image"
+                            src="data:{{article.thumbnail_media_type}};base64,{{article.thumbnail_image}}"
+                            alt="Placeholder image">
+                    </a>
                 </div>
                 <div class="col-auto">
                     <span class="badge text-bg-danger my-2">{{article.category}}</span>
@@ -95,13 +92,20 @@
             <br>
             <span class="text-summary" style="font-size: 14px;">{{article.subtitle}}</span>
             <hr>
-            <span class="text-summary" style="font-size: 14px;">{{article.abstract}}</span>
+            <span class="text-summary" style="font-size: 14px;" [innerHTML]="article.abstract"></span>
             <br>
         </div>
-        <div class="row mt-auto mt-4 justify-content-between" style="text-align: right;">
+        <div class="row mt-auto mt-4" style="text-align: right;">
+            <div class="col-auto mt-auto" *ngIf="isLogged()">
+                <button class="btn btn-sm btn-outline-secondary rounded-2 mt-1" type="button"
+                    [routerLink]="['/modificate/', article.id]">
+                    <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
+                    &nbsp;Modify
+                </button>
+            </div>
             <div class="col-auto mt-auto" *ngIf="isLogged()">
                 <button class="btn btn-sm btn-outline-danger rounded-2" (click)="openModal(mymodal, article.id)">
-                    <fa-icon [icon]="['fas', 'trash']"></fa-icon> Delate
+                    <fa-icon [icon]="['fas', 'trash']"></fa-icon> Delete
                 </button>
             </div>
         </div>
